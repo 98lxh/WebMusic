@@ -1,4 +1,4 @@
-import React, { memo, useMemo } from "react";
+import React, { memo, useCallback, useMemo } from "react";
 import { HeaderMenu, HeaderSearch } from "./cnps";
 import { useLocation } from "react-router-dom";
 import { headerLinks } from "../../common/local-date";
@@ -7,15 +7,16 @@ import "./index.less";
 const GlobalHeader: React.FC = memo(() => {
   const { pathname } = useLocation();
 
-  const mapPathToSubMenu = () => {
+  const mapPathToSubMenu = useCallback(() => {
+    console.log("执行");
     const menu = headerLinks.filter((route) =>
       pathname.includes(route.link)
     )[0];
     if (menu) return menu.children;
     return [];
-  };
+  }, [pathname]);
 
-  const subMenu = useMemo(() => mapPathToSubMenu(), [pathname]);
+  const subMenu = useMemo(() => mapPathToSubMenu(), [mapPathToSubMenu]);
 
   return (
     <div className="muisc-header-wrapper">
@@ -29,7 +30,9 @@ const GlobalHeader: React.FC = memo(() => {
           </div>
         </div>
         <div className="content-submenu">
-          {subMenu.length && <HeaderMenu height="2.5rem" menuList={subMenu} />}
+          {subMenu.length ? (
+            <HeaderMenu height="2.5rem" menuList={subMenu} />
+          ) : null}
         </div>
       </div>
     </div>

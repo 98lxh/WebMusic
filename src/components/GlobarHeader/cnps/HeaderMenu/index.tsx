@@ -2,13 +2,13 @@ import React, { memo } from "react";
 import { Menu } from "antd";
 import { NavLink } from "react-router-dom";
 
-type HeaderMenu = {
+type HeaderMenuType = {
   title: string;
   link: string;
 };
 
 interface IHeaderMenuProps {
-  menuList: HeaderMenu[];
+  menuList: HeaderMenuType[];
   height?: string;
 }
 
