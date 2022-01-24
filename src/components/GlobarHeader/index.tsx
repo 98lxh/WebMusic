@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useMemo } from "react";
-import { HeaderMenu, HeaderSearch } from "./cnps";
+import { HeaderMenu, HeaderSearch } from "./cpns";
 import { useLocation } from "react-router-dom";
 import { headerLinks } from "../../common/local-date";
 
@@ -38,5 +38,4 @@ const GlobalHeader: React.FC = memo(() => {
     </div>
   );
 });
-
 export default GlobalHeader;
