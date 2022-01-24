@@ -1,18 +1,34 @@
-import React from "react";
+import React, { memo } from "react";
 import { Menu } from "antd";
 import { NavLink } from "react-router-dom";
-import { headerLinks } from "../../../../common/local-date";
 
-const HeaderMenu: React.FC = () => {
+type HeaderMenu = {
+  title: string;
+  link: string;
+};
+
+interface IHeaderMenuProps {
+  menuList: HeaderMenu[];
+  height?: string;
+}
+
+const HeaderMenu: React.FC<IHeaderMenuProps> = memo((props) => {
+  const { menuList, height } = props;
+
+  const menuStyle = () => ({
+    height: height ? height : "4rem",
+    lineHeight: height ? height : "4rem",
+  });
+
   return (
-    <Menu className="content-left" mode="horizontal" defaultActiveFirst>
-      {headerLinks.map((route) => (
+    <Menu mode="horizontal" style={menuStyle()} defaultActiveFirst>
+      {menuList.map((route) => (
         <Menu.Item key={route.title}>
           <NavLink to={route.link}>{route.title}</NavLink>
         </Menu.Item>
       ))}
     </Menu>
   );
-};
+});
 
 export default HeaderMenu;
