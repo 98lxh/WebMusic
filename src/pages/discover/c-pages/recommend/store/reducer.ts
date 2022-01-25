@@ -11,9 +11,9 @@ interface IRecommendAction {
   topBanners?: RecommendBannersType[];
 }
 
-const defaultState = Map({
+const defaultState = {
   topBanners: [],
-});
+};
 
 const reducer: Reducer<any, IRecommendAction> = (
   state = defaultState,
@@ -21,7 +21,7 @@ const reducer: Reducer<any, IRecommendAction> = (
 ) => {
   switch (action.type) {
     case RecommedActionType.CHANGE_BANNER_TOP:
-      return state.set("topBanners", action.topBanners);
+      return { ...state, topBanners: action.topBanners! };
     default:
       return state;
   }

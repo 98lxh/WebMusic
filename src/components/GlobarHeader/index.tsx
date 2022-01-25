@@ -8,7 +8,6 @@ const GlobalHeader: React.FC = memo(() => {
   const { pathname } = useLocation();
 
   const mapPathToSubMenu = useCallback(() => {
-    console.log("执行");
     const menu = headerLinks.filter((route) =>
       pathname.includes(route.link)
     )[0];
