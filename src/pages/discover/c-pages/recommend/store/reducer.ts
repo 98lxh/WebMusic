@@ -1,7 +1,6 @@
 import { Reducer } from "redux";
-import { RecommendBannersType } from "../../../../../service/module/recommend";
+import { RecommendBannersType } from "../../../../../service/module/types";
 import { RecommedActionType } from "./constants";
-import { Map } from "immutable";
 export interface IRecommendState {
   topBanners: RecommendBannersType[];
 }
@@ -15,7 +14,7 @@ const defaultState = {
   topBanners: [],
 };
 
-const reducer: Reducer<any, IRecommendAction> = (
+const reducer: Reducer<IRecommendState, IRecommendAction> = (
   state = defaultState,
   action
 ) => {
