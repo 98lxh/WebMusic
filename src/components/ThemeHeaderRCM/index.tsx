@@ -31,7 +31,7 @@ const ThemeHeaderRCM: React.FC<IThemeHeaderRCMProsp> = memo((props) => {
         <div className="keyword-container">{keywords && renderKeyword()}</div>
       </div>
       <div className="right">
-        <a href="javascript:;">更多</a>
+        <a href="xxx">更多</a>
         <ArrowRightOutlined />
       </div>
     </div>

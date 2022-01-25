@@ -9,7 +9,7 @@ const Layout: React.FC = memo(() => {
     <div className="layout-wrapper">
       <GlobalHeader />
       <Row gutter={24} justify={"center"}>
-        <Col sm={24} xs={24} md={24} lg={22} xl={20}>
+        <Col sm={24} xs={24} md={24} lg={18} xl={16}>
           <Outlet />
         </Col>
       </Row>

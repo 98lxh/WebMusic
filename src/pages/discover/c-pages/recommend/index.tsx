@@ -6,16 +6,18 @@ import NewAlbum from "./cpns/NewAlbum";
 import RankingRecommend from "./cpns/RankingRecommend";
 import "./index.less";
 
-const Recommend: React.FC = () => {
+const Recommend: React.FC = memo(() => {
   return (
     <div className="recommend-wrapper">
-      <Banner />
-      <HotRecommed />
-      <NewAlbum />
-      <RankingRecommend />
+      <div className="recommend-main">
+        <Banner />
+        <HotRecommed />
+        <RankingRecommend />
+        <NewAlbum />
+      </div>
       <GolbalDrawer title="入驻歌手/热门主播"></GolbalDrawer>
     </div>
   );
-};
+});
 
-export default memo(Recommend);
+export default Recommend;

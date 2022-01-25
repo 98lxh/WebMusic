@@ -1,30 +1,49 @@
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import ThemeHeaderRCM from "../../../../../../components/ThemeHeaderRCM";
-
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { getHotRecommendAction } from "../../store/actionCreators";
+import { IRootState } from "../../../../../../store/reducer";
+import { Card, Col, Row } from "antd";
+import "./index.less";
+import { FireOutlined } from "@ant-design/icons";
 const HotRecommed: React.FC = memo(() => {
+  const dispatch = useDispatch();
+  const { hopRecommends } = useSelector(
+    (state: IRootState) => ({
+      hopRecommends: state.recommend.hotRecommends,
+    }),
+    shallowEqual
+  );
+  useEffect(() => {
+    dispatch(getHotRecommendAction());
+  }, [dispatch]);
+
   return (
     <div className="hot-recommend-wrapper">
-      <ThemeHeaderRCM
-        title="热门推荐"
-        keywords={[
-          {
-            name: "华语",
-            url: "xxx",
-          },
-          {
-            name: "华语",
-            url: "xxx",
-          },
-          {
-            name: "华语",
-            url: "xxx",
-          },
-          {
-            name: "华语",
-            url: "xxx",
-          },
-        ]}
-      />
+      <ThemeHeaderRCM title="热门推荐" />
+      <Row className="hot-list" gutter={24}>
+        {hopRecommends.map((hot, index) => (
+          <Col
+            className="hot-item"
+            xs={12}
+            sm={8}
+            md={6}
+            lg={6}
+            xl={6}
+            key={hot.picUrl}
+          >
+            <Card
+              hoverable
+              cover={index !== 3 && index !== 0 && <img src={hot.picUrl} />}
+            >
+              <div className="hot-desc-mask">
+                <FireOutlined />
+                {hot.name}
+              </div>
+            </Card>
+          </Col>
+        ))}
+      </Row>
     </div>
   );
 });

@@ -1,5 +1,8 @@
 import { RecommedActionType } from "./constants";
-import { getTopBanners } from "./../../../../../service/module/recommend";
+import {
+  getTopBanners,
+  getHotRecommends,
+} from "./../../../../../service/module/recommend";
 import { Dispatch } from "react";
 
 const changeTopBannerAction = (res: any) => ({
@@ -10,5 +13,16 @@ const changeTopBannerAction = (res: any) => ({
 export const getTopBannerAction = () => (dispatch: Dispatch<any>) => {
   getTopBanners().then((res) => {
     dispatch(changeTopBannerAction(res.data));
+  });
+};
+
+const changeHotRecommendsAction = (res: any) => ({
+  type: RecommedActionType.CHANGE_HOT_ROCOMMEND,
+  hotRecommends: res.result,
+});
+
+export const getHotRecommendAction = () => (dispatch: Dispatch<any>) => {
+  getHotRecommends().then((res) => {
+    dispatch(changeHotRecommendsAction(res.data));
   });
 };

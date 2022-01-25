@@ -14,3 +14,12 @@ export const getHotRecommends = () => {
     },
   });
 };
+
+export const getTopList = (idx: number) => {
+  return request({
+    url: "/top/list",
+    params: {
+      idx,
+    },
+  });
+};
