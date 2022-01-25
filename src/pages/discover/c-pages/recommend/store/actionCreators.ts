@@ -11,8 +11,8 @@ const changeTopBannerAction = (res: any) => ({
 });
 
 export const getTopBannerAction =
-  (loadNode: React.ReactElement) => (dispatch: Dispatch<any>) => {
-    getTopBanners(loadNode).then((res) => {
+  (loadElm: Element) => (dispatch: Dispatch<any>) => {
+    getTopBanners(loadElm).then((res) => {
       dispatch(changeTopBannerAction((res as any).data));
     });
   };

@@ -26,16 +26,13 @@ const HotRecommed: React.FC = memo(() => {
           <Col
             className="hot-item"
             xs={12}
-            sm={8}
+            sm={6}
             md={6}
             lg={6}
             xl={6}
             key={hot.picUrl}
           >
-            <Card
-              hoverable
-              cover={index !== 3 && index !== 0 && <img src={hot.picUrl} />}
-            >
+            <Card hoverable cover={<img src={hot.picUrl} />}>
               <div className="hot-desc-mask">
                 <FireOutlined />
                 {hot.name}

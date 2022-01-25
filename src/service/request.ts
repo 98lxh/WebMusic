@@ -1,6 +1,7 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import axios from "axios";
 
 import { BASE_URL, TIMEOUT } from "./config";
+import { IRequestConfig } from "./types";
 
 const instance = axios.create({
   baseURL: BASE_URL,
@@ -15,19 +16,6 @@ instance.interceptors.request.use((config) => {
 instance.interceptors.response.use((res) => {
   return res;
 });
-
-interface IServiceInterceptors<T = AxiosResponse> {
-  requestInterceptor?: (config: AxiosRequestConfig) => AxiosRequestConfig;
-  requestIntercetorCatch?: (error: any) => any;
-  responseInterceptor?: (res: T) => T;
-  responseIntercetorCatch?: (error: any) => any;
-}
-
-//extensions axios request config
-interface IRequestConfig<T = AxiosResponse> extends AxiosRequestConfig {
-  interceptors?: IServiceInterceptors<T>;
-  showLoadding?: boolean;
-}
 
 export function request<T>(config: IRequestConfig<T>): Promise<T> {
   return new Promise((resolve, reject) => {

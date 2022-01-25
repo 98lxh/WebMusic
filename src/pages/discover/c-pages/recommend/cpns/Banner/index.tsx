@@ -4,11 +4,11 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { getTopBannerAction } from "../../store/actionCreators";
 import { IRootState } from "../../../../../../store/reducer";
 
-import { Carousel, Skeleton } from "antd";
+import { Carousel } from "antd";
 import "./index.less";
 const Banner: React.FC = () => {
   const dispatch = useDispatch();
-  const d = useRef<any>();
+  const loadingRef = useRef<HTMLDivElement>(null);
   const { topBanners } = useSelector(
     (state: IRootState) => ({
       topBanners: state.recommend.topBanners,
@@ -16,13 +16,13 @@ const Banner: React.FC = () => {
     shallowEqual
   );
   useEffect(() => {
-    dispatch(getTopBannerAction(d.current!));
+    dispatch(getTopBannerAction(loadingRef.current!));
   }, [dispatch]);
 
   return (
     <div className="banner-wrapper">
       <div className="banner">
-        <div style={{ width: "100px", height: "100px" }} ref={d}></div>
+        <div ref={loadingRef}></div>
         <Carousel effect={"fade"} autoplay>
           {topBanners.map((banner) => (
             <div className="banner-item" key={banner.imageUrl}>
