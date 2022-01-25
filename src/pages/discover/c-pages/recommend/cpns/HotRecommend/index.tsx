@@ -3,7 +3,7 @@ import ThemeHeaderRCM from "../../../../../../components/ThemeHeaderRCM";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { getHotRecommendAction } from "../../store/actionCreators";
 import { IRootState } from "../../../../../../store/reducer";
-import { Card, Col, Row } from "antd";
+import { Card, Col, Row, Skeleton } from "antd";
 import "./index.less";
 import { FireOutlined } from "@ant-design/icons";
 const HotRecommed: React.FC = memo(() => {

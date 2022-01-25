@@ -10,11 +10,12 @@ const changeTopBannerAction = (res: any) => ({
   topBanners: res.banners,
 });
 
-export const getTopBannerAction = () => (dispatch: Dispatch<any>) => {
-  getTopBanners().then((res) => {
-    dispatch(changeTopBannerAction(res.data));
-  });
-};
+export const getTopBannerAction =
+  (loadNode: React.ReactElement) => (dispatch: Dispatch<any>) => {
+    getTopBanners(loadNode).then((res) => {
+      dispatch(changeTopBannerAction((res as any).data));
+    });
+  };
 
 const changeHotRecommendsAction = (res: any) => ({
   type: RecommedActionType.CHANGE_HOT_ROCOMMEND,
@@ -23,6 +24,6 @@ const changeHotRecommendsAction = (res: any) => ({
 
 export const getHotRecommendAction = () => (dispatch: Dispatch<any>) => {
   getHotRecommends().then((res) => {
-    dispatch(changeHotRecommendsAction(res.data));
+    dispatch(changeHotRecommendsAction((res as any).data));
   });
 };
