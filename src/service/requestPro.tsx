@@ -3,10 +3,11 @@ import { Spin } from "antd";
 import ReactDOM from "react-dom";
 import instance from "./request";
 import { IRequestConfig } from "./types";
+import { AxiosResponse } from "axios";
 export function requestLoadWithElement<T>(
   config: IRequestConfig<T>,
   loadElm: Element
-): Promise<T> {
+): Promise<AxiosResponse<T>> {
   config.interceptors = {};
 
   config.interceptors!.requestInterceptor = (config) => {
@@ -29,11 +30,12 @@ export function requestLoadWithElement<T>(
 
   return new Promise((resolve, reject) => {
     instance
-      .request<any, T>(config)
+      .request<any, AxiosResponse<T>>(config)
       .then((res) => {
         if (config.interceptors!.responseInterceptor) {
-          res = config.interceptors!.responseInterceptor(res);
+          (res as any) = config.interceptors!.responseInterceptor(res as any);
         }
+        console.log("resolve", res);
         resolve(res);
       })
       .catch((error) => {

@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useRef } from "react";
+import React, { memo, useEffect, useRef } from "react";
 
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { getTopBannerAction } from "../../store/actionCreators";
@@ -16,8 +16,10 @@ const Banner: React.FC = () => {
     shallowEqual
   );
   useEffect(() => {
-    dispatch(getTopBannerAction(loadingRef.current!));
-  }, [dispatch]);
+    if (!topBanners.length) {
+      dispatch(getTopBannerAction(loadingRef.current!));
+    }
+  }, [dispatch, topBanners]);
 
   return (
     <div className="banner-wrapper">

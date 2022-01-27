@@ -1,26 +1,34 @@
 import { request } from "../request";
 import { requestLoadWithElement } from "../requestPro";
-import { HotRecommend, RecommendBannersType } from "./types";
-export const getTopBanners = (loadNode: any) => {
-  return requestLoadWithElement<RecommendBannersType>(
+import {
+  HotRecommend,
+  IHotRecommend,
+  IRecommendBannners,
+  ITopRecommend,
+} from "./types";
+export const getTopBanners = (loadElm: Element) => {
+  return requestLoadWithElement<IRecommendBannners>(
     {
       url: "/banner",
     },
-    loadNode
+    loadElm
   );
 };
 
-export const getHotRecommends = () => {
-  return request<HotRecommend>({
-    url: "/personalized",
-    params: {
-      limit: 8,
+export const getHotRecommends = (loadElm: Element) => {
+  return requestLoadWithElement<IHotRecommend>(
+    {
+      url: "/personalized",
+      params: {
+        limit: 8,
+      },
     },
-  });
+    loadElm
+  );
 };
 
 export const getTopList = (idx: number) => {
-  return request({
+  return request<ITopRecommend>({
     url: "/top/list",
     params: {
       idx,

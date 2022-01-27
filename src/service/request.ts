@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { Axios, AxiosResponse } from "axios";
 
 import { BASE_URL, TIMEOUT } from "./config";
 import { IRequestConfig } from "./types";
@@ -17,17 +17,21 @@ instance.interceptors.response.use((res) => {
   return res;
 });
 
-export function request<T>(config: IRequestConfig<T>): Promise<T> {
+export function request<T>(
+  config: IRequestConfig<T>
+): Promise<AxiosResponse<T>> {
   return new Promise((resolve, reject) => {
     if (config.interceptors?.requestInterceptor) {
       config = config.interceptors.requestInterceptor(config);
     }
 
     instance
-      .request<any, T>(config)
+      .request<any, AxiosResponse<T>>(config)
       .then((res) => {
         if (config.interceptors?.responseInterceptor) {
-          res = config.interceptors.responseInterceptor(res);
+          (res as unknown) = config.interceptors.responseInterceptor(
+            res as any
+          );
         }
 
         resolve(res);

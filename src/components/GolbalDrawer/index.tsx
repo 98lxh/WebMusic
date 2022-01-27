@@ -25,6 +25,7 @@ const GolbalDrawer: React.FC<IGolbalDrawerProps & DrawerProps> = memo(
         <Drawer
           visible={visible}
           onClose={() => setVisible(false)}
+          destroyOnClose
           {...drawerProps}
         >
           {children}
