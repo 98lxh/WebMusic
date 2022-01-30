@@ -1,0 +1,111 @@
+.player-bar-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  border-radius: 0.2rem;
+  transition: all 0.5s ease-in-out;
+  bottom: 0;
+  transform: translateY(100%);
+
+  &.show {
+    transform: translateY(0%);
+  }
+
+  .content-toggle {
+    position: absolute;
+    right: 3rem;
+    top: -1.4rem;
+    padding: 0.2rem 0.8rem;
+    text-align: center;
+    font-weight: 800;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-bottom: 0px;
+    cursor: pointer;
+  }
+
+  .content {
+    display: flex;
+    padding: 1rem;
+    align-items: center;
+
+    .updn {
+      width: 22%;
+      font-size: 1.2rem;
+      margin-top: 0.8rem;
+      color: #2a2a2a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.5rem;
+    }
+
+    .play-info {
+      display: flex;
+      align-items: center;
+
+      .image {
+        height: 3rem;
+        width: 3rem;
+        border-radius: 0.1rem;
+        margin: 0 0.5rem;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+
+        img {
+          height: 3rem;
+          width: 3rem;
+        }
+      }
+
+      .info {
+        font-size: 0.95rem;
+        width: 100%;
+
+        .song-name {
+          margin: 0 0.2rem;
+        }
+
+        .singer-name {
+          color: rgb(143, 143, 143);
+          font-size: 0.8rem;
+        }
+
+        .progress {
+          width: 100%;
+          display: flex;
+          align-items: center;
+
+          .progress-bar {
+            width: 80%;
+            .ant-slider-track {
+              background-color: #191919;
+            }
+
+            .ant-slider-handle {
+              border: 1px solid rgb(143, 143, 143);
+            }
+          }
+
+          .time-info {
+            width: 30%;
+            text-align: center;
+            color: #797979;
+            margin-left: 0.5rem;
+
+            .divider {
+              margin: 0 0.2rem;
+            }
+
+            .now-time {
+              color: #a1a1a1;
+            }
+          }
+        }
+      }
+    }
+  }
+}

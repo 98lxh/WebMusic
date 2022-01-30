@@ -1,4 +1,4 @@
-import axios, { Axios, AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 
 import { BASE_URL, TIMEOUT } from "./config";
 import { IRequestConfig } from "./types";
