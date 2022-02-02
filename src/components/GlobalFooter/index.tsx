@@ -1,7 +1,7 @@
 import React, { memo } from "react";
-
+import "./index.less";
 const GlobarFooter: React.FC = memo(() => {
-  return <h1 style={{ textAlign: "center", height: "6rem" }}>footer</h1>;
+  return <div className="footer-wrapper"></div>;
 });
 
 export default GlobarFooter;

@@ -9,7 +9,7 @@ const changeCurrentSongAction = (currentSong: any) => ({
 
 export const getSongDetailAction = (ids: number) => {
   return (dispatch: Dispatch<any>) => {
-    getSongDetail_163(1430583016).then((res) => {
+    getSongDetail_163(1489310689).then((res) => {
       dispatch(changeCurrentSongAction(res.data.songs[0]));
     });
   };

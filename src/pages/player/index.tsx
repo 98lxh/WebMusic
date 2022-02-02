@@ -1,5 +1,4 @@
 import {
-  CaretRightOutlined,
   ContainerOutlined,
   DownOutlined,
   StepBackwardOutlined,
@@ -13,10 +12,13 @@ import { IRootState } from "../../store/reducer";
 import { formatDate } from "../../utils/format-utils";
 import { getSongDetailAction } from "./store/actionCreators";
 import "./index.less";
+import PlayerMenu from "./cpns/playerMenu";
 const PlayerBar: React.FC = memo(() => {
   const [showPlayer, setShowPlayer] = useState(true);
   const [currentTime, setCurrentTime] = useState(0);
   const [isChange, setIsChange] = useState(false);
+  const [isPlay, setIsPlay] = useState(false);
+  const [isShowPlayerMenu, setIsShowPlayerMenu] = useState(false);
   const dispatch = useDispatch();
   const audioRef = useRef<HTMLAudioElement>(null);
   const { currentSong } = useSelector((state: IRootState) => ({
@@ -26,35 +28,50 @@ const PlayerBar: React.FC = memo(() => {
   const singerName = currentSong.ar && currentSong.ar[0].name;
   const duration = currentSong.dt || 0;
   const [progress, setProgress] = useState(0);
-  const playMuisc = () => {
-    audioRef.current!.src =
-      "https://music.163.com/song/media/outer/url?id=" + 1430583016 + ".mp3";
-    audioRef.current!.play();
-  };
+  const playMuisc = useCallback(() => {
+    isPlay ? audioRef.current?.pause() : audioRef.current?.play();
+    setIsPlay(!isPlay);
+  }, [isPlay]);
   const timeUpdate = (event: React.UIEvent<HTMLAudioElement>) => {
     if (isChange) return;
     setCurrentTime(event.currentTarget.currentTime * 1000);
     setProgress((currentTime / duration) * 100);
   };
-  const sliderChange = useCallback((value: number) => {
-    const currentTime = (value / 100) * duration;
-    setIsChange(true);
-    setCurrentTime(currentTime);
-    setProgress(value);
-  }, []);
+  const handlePlayerMenu = (isShow: boolean) => {
+    setIsShowPlayerMenu(isShow);
+  };
+  const showPlayerMenu = handlePlayerMenu.bind(null, true);
+  const closePlayerMenu = handlePlayerMenu.bind(null, false);
+  const sliderChange = useCallback(
+    (value: number) => {
+      const currentTime = (value / 100) * duration;
+      setIsChange(true);
+      setCurrentTime(currentTime);
+      setProgress(value);
+    },
+    [duration]
+  );
   const sliderAfterChange = useCallback(
     (value: number) => {
       const currentTime = ((value / 100) * duration) / 1000;
       audioRef.current!.currentTime = currentTime;
       setCurrentTime(currentTime * 1000);
       setIsChange(false);
+      if (!isPlay) {
+        playMuisc();
+      }
     },
-    [duration]
+    [duration, isPlay, playMuisc]
   );
   useEffect(() => {
-    dispatch(getSongDetailAction(1430583016));
-  }, [dispatch]);
-
+    dispatch(getSongDetailAction(currentSong.id));
+  }, [dispatch, currentSong.id]);
+  useEffect(() => {
+    audioRef.current!.src =
+      "https://music.163.com/song/media/outer/url?id=" +
+      currentSong.id +
+      ".mp3";
+  }, [currentSong]);
   const togglePlayer = () => {
     setShowPlayer(!showPlayer);
   };
@@ -78,6 +95,7 @@ const PlayerBar: React.FC = memo(() => {
                 <div className="progress-bar">
                   <Slider
                     onChange={sliderChange}
+                    tooltipVisible={false}
                     onAfterChange={sliderAfterChange}
                     defaultValue={30}
                     value={progress}
@@ -96,23 +114,27 @@ const PlayerBar: React.FC = memo(() => {
               <StepBackwardOutlined />
             </div>
             <div>
-              <CaretRightOutlined onClick={playMuisc} />
+              <i
+                className={`iconfont ${
+                  isPlay ? "icon-24gf-pause2" : "icon-shipinbofangshibofang"
+                }`}
+                onClick={playMuisc}
+              ></i>
             </div>
             <div>
               <StepForwardOutlined />
             </div>
-            <div
-              className="xx"
-              onClick={() => {
-                console.log(currentSong);
-              }}
-            >
-              单曲循环
+            <div>
+              <i className={`iconfont icon-danquxunhuan`} />
             </div>
             <div>
-              <Badge status="default" count={2}>
-                <ContainerOutlined style={{ fontSize: "1.5rem" }} />
+              <Badge count={0}>
+                <ContainerOutlined
+                  style={{ fontSize: "1.5rem" }}
+                  onClick={showPlayerMenu}
+                />
               </Badge>
+              <PlayerMenu isShow={isShowPlayerMenu} onClose={closePlayerMenu} />
             </div>
           </Col>
         </Row>

@@ -10,13 +10,17 @@
 
       .ant-card-body {
         padding: 0 !important;
+        height: 100%;
         display: flex;
         justify-content: center;
         position: relative;
 
-        .hot-desc-mask {
+        .hot-desc {
           position: absolute;
           background-color: rgba(0, 0, 0, 0.6);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
           color: #fff;
           width: 100%;
           bottom: 0px;
