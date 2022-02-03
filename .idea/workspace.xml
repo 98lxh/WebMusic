@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bcafd5fd-5b36-4b6c-b9bc-e71ae97a14fe" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/discover/c-pages/recommend/cpns/Banner/index.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/discover/c-pages/recommend/cpns/Banner/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/GlobarHeader/cnps/HeaderMenu/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GlobarHeader/cpns/HeaderMenu/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/GlobarHeader/cnps/HeaderSearch/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GlobarHeader/cpns/HeaderSearch/index.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/GlobarHeader/cnps/HeaderSearch/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GlobarHeader/cpns/HeaderSearch/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/GlobarHeader/cnps/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GlobarHeader/cpns/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/GlobarHeader/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GlobarHeader/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/discover/c-pages/recommend/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/discover/c-pages/recommend/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/player/cpns/playerMenu/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/player/cpns/playerMenu/index.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/player/cpns/playerMenu/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/player/cpns/playerMenu/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,11 +28,14 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="ts.external.directory.path" value="C:\Users\89793\Desktop\WebMuisc\node_modules\typescript\lib" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
+    <property name="ts.external.directory.path" value="C:\Users\89793\Desktop\WebMusic\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -51,6 +48,7 @@
       <updated>1642754095184</updated>
       <workItem from="1642754106661" duration="375000" />
       <workItem from="1643030368701" duration="3837000" />
+      <workItem from="1643801916067" duration="4915000" />
     </task>
     <servers />
   </component>
@@ -67,5 +65,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
