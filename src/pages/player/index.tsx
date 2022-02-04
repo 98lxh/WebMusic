@@ -10,7 +10,7 @@ import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../../store/reducer";
 import { formatDate } from "../../utils/format-utils";
-import { getSongDetailAction } from "./store/actionCreators";
+import {changeSequenceAction, getSongDetailAction} from "./store/actionCreators";
 import "./index.less";
 import PlayerMenu from "./cpns/playerMenu";
 const PlayerBar: React.FC = memo(() => {
@@ -21,14 +21,16 @@ const PlayerBar: React.FC = memo(() => {
   const [isShowPlayerMenu, setIsShowPlayerMenu] = useState(false);
   const dispatch = useDispatch();
   const audioRef = useRef<HTMLAudioElement>(null);
-  const { currentSong } = useSelector((state: IRootState) => ({
+  const { currentSong,sequence,playList } = useSelector((state: IRootState) => ({
     currentSong: state.playerBar.currentSong as any,
+    sequence:state.playerBar.sequence,
+    playList:state.playerBar.playList
   }));
   const picUrl = (currentSong.al && currentSong.al.picUrl) || "";
   const singerName = currentSong.ar && currentSong.ar[0].name;
   const duration = currentSong.dt || 0;
   const [progress, setProgress] = useState(0);
-  const playMuisc = useCallback(() => {
+  const playMusic = useCallback(() => {
     isPlay ? audioRef.current?.pause() : audioRef.current?.play();
     setIsPlay(!isPlay);
   }, [isPlay]);
@@ -40,8 +42,9 @@ const PlayerBar: React.FC = memo(() => {
   const handlePlayerMenu = (isShow: boolean) => {
     setIsShowPlayerMenu(isShow);
   };
-  const showPlayerMenu = handlePlayerMenu.bind(null, true);
-  const closePlayerMenu = handlePlayerMenu.bind(null, false);
+  const closePlayerMenu = () => {
+    setIsShowPlayerMenu(false)
+  }
   const sliderChange = useCallback(
     (value: number) => {
       const currentTime = (value / 100) * duration;
@@ -58,14 +61,18 @@ const PlayerBar: React.FC = memo(() => {
       setCurrentTime(currentTime * 1000);
       setIsChange(false);
       if (!isPlay) {
-        playMuisc();
+        playMusic();
       }
     },
-    [duration, isPlay, playMuisc]
+    [duration, isPlay, playMusic]
   );
+  //切换列表循环和单曲循环
+  const changeSequence = () => {
+    dispatch(changeSequenceAction(sequence === 0 ? 1 : 0))
+  }
   useEffect(() => {
-    dispatch(getSongDetailAction(currentSong.id));
-  }, [dispatch, currentSong.id]);
+    dispatch(getSongDetailAction(1430583016));
+  }, [dispatch]);
   useEffect(() => {
     audioRef.current!.src =
       "https://music.163.com/song/media/outer/url?id=" +
@@ -77,6 +84,7 @@ const PlayerBar: React.FC = memo(() => {
   };
   return (
     <div className={`player-bar-wrapper ${showPlayer && "show"}`}>
+      <PlayerMenu isShow={isShowPlayerMenu} onClose={closePlayerMenu} />
       <div className="content">
         <div className="content-toggle" onClick={togglePlayer}>
           {showPlayer ? <UpOutlined /> : <DownOutlined />}
@@ -113,28 +121,25 @@ const PlayerBar: React.FC = memo(() => {
             <div>
               <StepBackwardOutlined />
             </div>
-            <div>
+            <div onClick={playMusic}>
               <i
                 className={`iconfont ${
                   isPlay ? "icon-24gf-pause2" : "icon-shipinbofangshibofang"
                 }`}
-                onClick={playMuisc}
-              ></i>
+               />
             </div>
             <div>
               <StepForwardOutlined />
             </div>
-            <div>
-              <i className={`iconfont icon-danquxunhuan`} />
+            <div onClick={changeSequence}>
+              <i className={`iconfont ${sequence === 0 ? ' icon-danquxunhuan' : 'icon-liebiaoxunhuan'}`} />
             </div>
             <div>
-              <Badge count={0}>
-                <ContainerOutlined
-                  style={{ fontSize: "1.5rem" }}
-                  onClick={showPlayerMenu}
+              <Badge count={playList.length}>
+                <ContainerOutlined className={`player-menu-btn ${isShowPlayerMenu && 'active'}`}
+                  onClick={()=>{setIsShowPlayerMenu(!isShowPlayerMenu)}}
                 />
               </Badge>
-              <PlayerMenu isShow={isShowPlayerMenu} onClose={closePlayerMenu} />
             </div>
           </Col>
         </Row>

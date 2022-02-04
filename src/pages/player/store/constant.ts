@@ -1,4 +1,7 @@
 enum actionTypes {
   CHANGE_CURRENT_SONG = "playerBar/CHANGE_CURRENT_SONG",
+  CHANGE_PLAY_LIST = "playerBar/CHANGE_PLAY_LIST",
+  CHANGE_CURRENT_SONG_INDEX = "playerBar/CHANGE_CURRENT_SONG_LIST",
+  CHANGE_SEQUENCE = 'playerBar/CHANGE_SEQUENCE'
 }
 export default actionTypes;

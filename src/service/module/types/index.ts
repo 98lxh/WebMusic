@@ -47,7 +47,7 @@ export interface IHotRecommend {
   result: HotRecommend[];
 }
 
-type TopPlayListTrack = {
+export type TopPlayListTrack = {
   name: string;
   id: number;
   pst: number;

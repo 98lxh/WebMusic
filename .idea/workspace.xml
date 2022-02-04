@@ -2,10 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bcafd5fd-5b36-4b6c-b9bc-e71ae97a14fe" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TopRanking/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TopRanking/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/player/cpns/playerMenu/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/player/cpns/playerMenu/index.less" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/player/cpns/playerMenu/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/player/cpns/playerMenu/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/player/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/player/index.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/player/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/player/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/player/store/actionCreators.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/player/store/actionCreators.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/player/store/constant.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/player/store/constant.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/player/store/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/player/store/reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/module/recommend.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/module/recommend.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/module/types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/module/types/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,6 +21,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -34,7 +49,7 @@
     <property name="node.js.selected.package.standard" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
     <property name="ts.external.directory.path" value="C:\Users\89793\Desktop\WebMusic\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -49,6 +64,7 @@
       <workItem from="1642754106661" duration="375000" />
       <workItem from="1643030368701" duration="3837000" />
       <workItem from="1643801916067" duration="4915000" />
+      <workItem from="1643882110671" duration="25009000" />
     </task>
     <servers />
   </component>

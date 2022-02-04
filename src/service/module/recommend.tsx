@@ -1,11 +1,11 @@
 import { request } from "../request";
 import { requestLoadWithElement } from "../requestPro";
 import {
-  HotRecommend,
   IHotRecommend,
   IRecommendBannners,
   ITopRecommend,
 } from "./types";
+
 export const getTopBanners = (loadElm: Element) => {
   return requestLoadWithElement<IRecommendBannners>(
     {
