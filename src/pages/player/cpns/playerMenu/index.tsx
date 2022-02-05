@@ -8,30 +8,35 @@ import {
   DownloadOutlined,
   CloseCircleFilled, CloseOutlined
 } from "@ant-design/icons";
-import {useSelector} from "react-redux";
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {IRootState} from "../../../../store/reducer";
 import {formatDate} from "../../../../utils/format-utils";
 import './index.less'
+import {changeCurrentSong} from "../../store/actionCreators";
 
 interface IPlayMenuProps {
   isShow: boolean;
   onClose: () => void;
 }
 const playerMenu: React.FC<IPlayMenuProps> = memo((props) => {
-  const { playList,currentSong } = useSelector((state:IRootState)=>({
+  const { playList,currentSong,currentLyric } = useSelector((state:IRootState)=>({
     playList:state.playerBar.playList,
-    currentSong:state.playerBar.currentSong
-  }))
+    currentSong:state.playerBar.currentSong,
+    currentLyric:state.playerBar.currentLyric
+  }),shallowEqual)
+  const dispatch = useDispatch();
+  const changeMusic = (musicIndex:number) => {
+    dispatch(changeCurrentSong('next',musicIndex))
+  }
   return (
       <div className={`player-menu-wrapper ${props.isShow && 'show'}`}>
         <Row gutter={24}>
           <Col sm={0} xs={0} md={10} lg={10} xl={10} className="music-info">
-            <div className="music-info-title">海底</div>
+            <div className="music-info-title">{currentSong.name}</div>
             <div className="music-lyric-wrapper">
               {
-                new Array(50).fill('x').map((lyric,index)=>(
-                    <p key={index} className={`music-lyric ${index === 2 && 'active'}`}>来不及来不及你曾笑着哭泣</p>
-                ))
+                currentLyric.map((lyricObj,index) =>
+                    (<p key={index} className={`music-lyric ${index === 2 && 'active'}`}>{lyricObj.content}</p>))
               }
             </div>
           </Col>
@@ -52,7 +57,11 @@ const playerMenu: React.FC<IPlayMenuProps> = memo((props) => {
             </div>
             <ul className="music-menu-list">
               {playList.map((music,index)=>(
-                  <li key={index} className={`music-menu-item ${currentSong.id === music.id && 'current-play'}`}>
+                  <li key={index}
+                      className={`music-menu-item ${currentSong.id === music.id && 'current-play'}`}
+                      onClick={()=>changeMusic(index)}
+                  >
+
                     <p className="music-name">{music.name}</p>
                     <div className="music-handle">
                       <DownloadOutlined />

@@ -7,3 +7,12 @@ export const getSongDetail_163 = (ids: number) => {
     },
   });
 };
+
+export const getLyric = (id:number) => {
+  return request({
+    url:'lyric',
+    params:{
+      id
+    }
+  })
+}

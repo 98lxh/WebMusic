@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bcafd5fd-5b36-4b6c-b9bc-e71ae97a14fe" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/utils/math-util.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/parse-lyric.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/TopRanking/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TopRanking/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/less/icon.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/less/icon.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/GlobalFooter/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GlobalFooter/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/player/cpns/playerMenu/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/player/cpns/playerMenu/index.less" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/player/cpns/playerMenu/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/player/cpns/playerMenu/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/player/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/player/index.less" afterDir="false" />
@@ -11,8 +14,7 @@
       <change beforePath="$PROJECT_DIR$/src/pages/player/store/actionCreators.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/player/store/actionCreators.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/player/store/constant.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/player/store/constant.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/player/store/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/player/store/reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/module/recommend.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/module/recommend.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/module/types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/module/types/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/module/player.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/module/player.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +66,7 @@
       <workItem from="1642754106661" duration="375000" />
       <workItem from="1643030368701" duration="3837000" />
       <workItem from="1643801916067" duration="4915000" />
-      <workItem from="1643882110671" duration="25009000" />
+      <workItem from="1643882110671" duration="39504000" />
     </task>
     <servers />
   </component>

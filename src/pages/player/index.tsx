@@ -7,10 +7,10 @@ import {
 } from "@ant-design/icons";
 import { Badge, Col, Row, Slider } from "antd";
 import React, { memo, useCallback, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import { IRootState } from "../../store/reducer";
 import { formatDate } from "../../utils/format-utils";
-import {changeSequenceAction, getSongDetailAction} from "./store/actionCreators";
+import {changeSequenceAction, getSongDetailAction,changeCurrentSong} from "./store/actionCreators";
 import "./index.less";
 import PlayerMenu from "./cpns/playerMenu";
 const PlayerBar: React.FC = memo(() => {
@@ -25,7 +25,7 @@ const PlayerBar: React.FC = memo(() => {
     currentSong: state.playerBar.currentSong as any,
     sequence:state.playerBar.sequence,
     playList:state.playerBar.playList
-  }));
+  }),shallowEqual);
   const picUrl = (currentSong.al && currentSong.al.picUrl) || "";
   const singerName = currentSong.ar && currentSong.ar[0].name;
   const duration = currentSong.dt || 0;
@@ -68,16 +68,38 @@ const PlayerBar: React.FC = memo(() => {
   );
   //切换列表循环和单曲循环
   const changeSequence = () => {
-    dispatch(changeSequenceAction(sequence === 0 ? 1 : 0))
+    let currentSequence = sequence + 1
+    if(currentSequence > 2){
+      currentSequence = 0
+    }
+    dispatch(changeSequenceAction(currentSequence))
+  }
+  //切换上一首和下一首歌曲
+  const changeMusic = (tag:'previous' | 'next') => {
+    dispatch(changeCurrentSong(tag))
+  }
+  //监听播放结束
+  const handleEnded = () => {
+    if(sequence === 0){
+      //单曲循环
+      audioRef.current!.play()
+    }else{
+      //非单曲循环
+      dispatch(changeCurrentSong('next'))
+    }
   }
   useEffect(() => {
     dispatch(getSongDetailAction(1430583016));
   }, [dispatch]);
   useEffect(() => {
-    audioRef.current!.src =
-      "https://music.163.com/song/media/outer/url?id=" +
+    audioRef.current!.src = "https://music.163.com/song/media/outer/url?id=" +
       currentSong.id +
       ".mp3";
+    audioRef.current!.play().then(() => {
+      setIsPlay(true)
+    }).catch(()=>{
+      setIsPlay(false)
+    })
   }, [currentSong]);
   const togglePlayer = () => {
     setShowPlayer(!showPlayer);
@@ -118,7 +140,7 @@ const PlayerBar: React.FC = memo(() => {
             </div>
           </Col>
           <Col sm={24} xs={24} md={8} lg={8} xl={8} className="updn">
-            <div>
+            <div onClick={()=>changeMusic('previous')}>
               <StepBackwardOutlined />
             </div>
             <div onClick={playMusic}>
@@ -128,11 +150,15 @@ const PlayerBar: React.FC = memo(() => {
                 }`}
                />
             </div>
-            <div>
-              <StepForwardOutlined />
+            <div onClick={()=>changeMusic('next')}>
+              <StepForwardOutlined  />
             </div>
             <div onClick={changeSequence}>
-              <i className={`iconfont ${sequence === 0 ? ' icon-danquxunhuan' : 'icon-liebiaoxunhuan'}`} />
+              <i className={`iconfont 
+              ${sequence === 0 ? ' icon-danquxunhuan' : 
+                sequence === 1 ?  'icon-suijibofang' : 
+                'icon-liebiaoxunhuan'
+              }`} />
             </div>
             <div>
               <Badge count={playList.length}>
@@ -144,7 +170,7 @@ const PlayerBar: React.FC = memo(() => {
           </Col>
         </Row>
       </div>
-      <audio ref={audioRef} onTimeUpdate={timeUpdate} />
+      <audio ref={audioRef} onTimeUpdate={timeUpdate} onEnded={handleEnded} />
     </div>
   );
 });

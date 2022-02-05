@@ -1,9 +1,12 @@
 import { Reducer } from "redux";
 import actionTypes from "./constant";
+import {ILyric} from "../../../utils/parse-lyric";
+
 export interface IPlayerBarState {
   currentSong: any;
   playList:any[],
-  sequence:number
+  sequence:number,
+  currentLyric:ILyric[]
 }
 const defaultState = {
   playList:[
@@ -234,7 +237,8 @@ const defaultState = {
   ],
   currentSongIndex:0,
   currentSong: {},
-  sequence:0 //0 单曲 1 循环
+  sequence:0, //0 单曲 1随机 //2顺序
+  currentLyric:[]
 };
 
 export const reducer: Reducer<IPlayerBarState> = (
@@ -250,6 +254,8 @@ export const reducer: Reducer<IPlayerBarState> = (
       return {...state,currentSongIndex:action.currentSongIndex}
     case actionTypes.CHANGE_SEQUENCE:
       return {...state,sequence: action.sequence}
+    case actionTypes.CHANGE_CURRENT_LYRIC:
+      return {...state,currentLyric: action.currentLyric}
     default:
       return state;
   }
