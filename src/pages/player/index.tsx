@@ -6,6 +6,7 @@ import PlayerHandler from "./cpns/playerHandler";
 import PlayerAudio, { IAudioRef } from "./cpns/playerAudio";
 import PlayerInfo from "./cpns/playerInfo";
 import "./index.less";
+import PlayerLyric from "./cpns/playerLyric";
 
 const PlayerBar: React.FC = memo(() => {
   //显示隐藏播放栏
@@ -20,6 +21,10 @@ const PlayerBar: React.FC = memo(() => {
   const [currentTime, setCurrentTime] = useState(0);
   //进度条是否在拖动中
   const [isChange, setIsChange] = useState(false);
+  //当前歌词索引
+  const [currentLyricIndex,setCurrentLyricIndex] = useState(-1)
+  //显示隐藏歌词
+  const [isShowLyric,setIsShowLyric] = useState(true);
   const [progress, setProgress] = useState(0);
 
   //播放 暂停
@@ -37,7 +42,7 @@ const PlayerBar: React.FC = memo(() => {
   };
   return (
     <div className={`player-bar-wrapper ${showPlayer && "show"}`}>
-      <PlayerMenu isShow={isShowPlayerMenu} onClose={closePlayerMenu} />
+      <PlayerMenu isShow={isShowPlayerMenu} onClose={closePlayerMenu} currentLyricIndex={currentLyricIndex}  />
       <div className="content">
         <div className="content-toggle" onClick={togglePlayer}>
           {showPlayer ? <UpOutlined /> : <DownOutlined />}
@@ -58,6 +63,8 @@ const PlayerBar: React.FC = memo(() => {
           <Col sm={24} xs={24} md={8} lg={8} xl={8}>
             <PlayerHandler
               isPlay={isPlay}
+              isShowLyric={isShowLyric}
+              setIsShowLyric={setIsShowLyric}
               isShowPlayerMenu={isShowPlayerMenu}
               setIsShowPlayer={setIsShowPlayerMenu}
               playMusic={playMusic}
@@ -71,8 +78,11 @@ const PlayerBar: React.FC = memo(() => {
           isPlay={isPlay}
           setProgress={setProgress}
           setCurrentTime={setCurrentTime}
+          currentLyricIndex={currentLyricIndex}
+          setCurrentLyricIndex={setCurrentLyricIndex}
           currentTime={currentTime}
         />
+        {isShowLyric && <PlayerLyric lyricIndex={currentLyricIndex}/>}
       </div>
     </div>
   );

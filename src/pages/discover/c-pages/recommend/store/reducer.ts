@@ -3,7 +3,7 @@ import {
   HotRecommend,
   RecommendBannersType,
   TopPlayList,
-} from "../../../../../service/module/types";
+} from "../../../../../service/module/netease/module/types";
 import { RecommedActionType } from "./constants";
 export interface IRecommendState {
   topBanners: RecommendBannersType[];

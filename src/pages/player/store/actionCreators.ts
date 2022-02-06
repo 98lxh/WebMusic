@@ -1,5 +1,5 @@
 import { Dispatch } from "react";
-import { getLyric, getSongDetail_163 } from "../../../service/module/player";
+import { getLyric, getSongDetail_netease } from "../../../service/module/netease/module/player";
 import actionTypes from "./constant";
 import { ILyric, parseLyric } from "../../../utils/parse-lyric";
 
@@ -10,7 +10,8 @@ const changeCurrentSongAction = (currentSong: any) => ({
 
 export const getSongDetailAction = (ids: number) => {
   return (dispatch: Dispatch<any>, getState: any) => {
-    getSongDetail_163(ids).then((res) => {
+    getSongDetail_netease(ids).then((res) => {
+      console.log('res',res)
       let song = null;
       // 根据id查找playList中是否存在该歌曲
       const playerList = getState().playerBar.playList;
@@ -27,7 +28,8 @@ export const getSongDetailAction = (ids: number) => {
         const newPlayList = [...playerList, song];
         dispatch(changePlayListAction(newPlayList));
         dispatch(changeCurrentSongIndexAction(newPlayList.length - 1));
-        dispatch(changeCurrentSongAction(song));
+        dispatch(changeCurrentSongAction(newPlayList[newPlayList.length - 1]));
+        console.log(getState())
       }
 
       //请求歌词

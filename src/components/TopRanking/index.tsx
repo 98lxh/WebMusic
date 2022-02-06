@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { TopPlayList,TopPlayListTrack } from "../../service/module/types";
+import { TopPlayList,TopPlayListTrack } from "../../service/module/netease/module/types";
 import { CaretRightOutlined, PlusOutlined } from "@ant-design/icons";
 import {getSongDetailAction} from '../../pages/player/store/actionCreators'
 import "./index.less";

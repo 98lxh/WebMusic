@@ -3,12 +3,12 @@ import {
   getTopBanners,
   getHotRecommends,
   getTopList,
-} from "./../../../../../service/module/recommend";
+} from "./../../../../../service/module/netease/module/recommend";
 import {
   IHotRecommend,
   IRecommendBannners,
   ITopRecommend,
-} from "./../../../../../service/module/types/index";
+} from "./../../../../../service/module/netease/module/types";
 import { Dispatch } from "react";
 
 const changeTopBannerAction = (res: IRecommendBannners) => ({

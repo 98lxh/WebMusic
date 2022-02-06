@@ -19,6 +19,8 @@ interface PlayerAudioProps {
   currentTime: number;
   setCurrentTime: (value: number) => void;
   isChange: boolean;
+    setCurrentLyricIndex:(value:number) => void;
+    currentLyricIndex:number
 }
 
 export interface IAudioRef {
@@ -27,13 +29,14 @@ export interface IAudioRef {
   setCurrentTime: (currentTime: number) => void;
 }
 const PlayerAudio = forwardRef<IAudioRef, PlayerAudioProps>(
-  ({ setIsPlay, setProgress, isChange, setCurrentTime, currentTime }, ref) => {
+  ({ setIsPlay, setProgress, isChange, setCurrentTime, currentTime,currentLyricIndex,setCurrentLyricIndex }, ref) => {
     const audioRef = useRef<HTMLAudioElement>(null);
-    const { currentSong, sequence, playList } = useSelector(
+    const { currentSong, sequence, playList,lyric } = useSelector(
       (state: IRootState) => ({
         currentSong: state.playerBar.currentSong as any,
         playList: state.playerBar.playList,
         sequence: state.playerBar.sequence,
+          lyric:state.playerBar.currentLyric
       }),
       shallowEqual
     );
@@ -57,6 +60,7 @@ const PlayerAudio = forwardRef<IAudioRef, PlayerAudioProps>(
     );
 
     useEffect(() => {
+        console.log('切换')
       audioRef.current!.src =
         "https://music.163.com/song/media/outer/url?id=" +
         currentSong.id +
@@ -73,12 +77,24 @@ const PlayerAudio = forwardRef<IAudioRef, PlayerAudioProps>(
 
     useEffect(() => {
       dispatch(getSongDetailAction(playList[0].id));
-    }, [dispatch, playList]);
+    }, [dispatch,playList[0]]);
 
     const timeUpdate = (event: React.UIEvent<HTMLAudioElement>) => {
       if (isChange) return;
       setCurrentTime(event.currentTarget.currentTime * 1000);
       setProgress((currentTime / duration) * 100);
+
+      //获取当前歌词
+        let lyricIndex = 0;
+        for(let i = 0; i < lyric.length;i++){
+            let lyricItem = lyric[i]
+            if(currentTime < lyricItem.time){
+                lyricIndex = i - 1
+                break
+            }
+        }
+
+        currentLyricIndex !== lyricIndex && setCurrentLyricIndex(lyricIndex)
     };
 
     //监听播放结束

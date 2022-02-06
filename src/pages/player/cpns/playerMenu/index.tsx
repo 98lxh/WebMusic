@@ -1,5 +1,5 @@
 import { Col, Row } from "antd";
-import React, { memo } from "react";
+import React, {memo, useEffect, useRef} from "react";
 import {
   DeleteOutlined,
   ShareAltOutlined,
@@ -15,9 +15,12 @@ import "./index.less";
 
 interface IPlayMenuProps {
   isShow: boolean;
+  currentLyricIndex:number;
   onClose: () => void;
 }
 const playerMenu: React.FC<IPlayMenuProps> = memo((props) => {
+  const {currentLyricIndex} = props;
+  const lyricRef = useRef<HTMLDivElement>(null)
   const { playList, currentSong, currentLyric } = useSelector(
     (state: IRootState) => ({
       playList: state.playerBar.playList,
@@ -26,6 +29,9 @@ const playerMenu: React.FC<IPlayMenuProps> = memo((props) => {
     }),
     shallowEqual
   );
+  useEffect(()=>{
+    lyricRef.current!.scrollTop = 25 * currentLyricIndex
+  },[currentLyricIndex])
   const dispatch = useDispatch();
   const changeMusic = (musicIndex: number) => {
     dispatch(changeCurrentSong("next", musicIndex));
@@ -35,11 +41,11 @@ const playerMenu: React.FC<IPlayMenuProps> = memo((props) => {
       <Row gutter={24}>
         <Col sm={0} xs={0} md={10} lg={10} xl={10} className="music-info">
           <div className="music-info-title">{currentSong.name}</div>
-          <div className="music-lyric-wrapper">
+          <div className="music-lyric-wrapper" ref={lyricRef}>
             {currentLyric.map((lyricObj, index) => (
               <p
                 key={index}
-                className={`music-lyric ${index === 2 && "active"}`}
+                className={`music-lyric ${index === currentLyricIndex && "active"}`}
               >
                 {lyricObj.content}
               </p>

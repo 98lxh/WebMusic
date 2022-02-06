@@ -15,13 +15,15 @@ import "./index.less";
 
 interface IPlayerHandlerProps {
   isPlay: boolean;
+  isShowLyric:boolean;
+  setIsShowLyric:(value:boolean) => void;
   isShowPlayerMenu: boolean;
   playMusic: () => void;
   setIsShowPlayer: (value: boolean) => void;
 }
 
 const PlayerHandler: React.FC<IPlayerHandlerProps> = memo((props) => {
-  const { isPlay, playMusic, setIsShowPlayer, isShowPlayerMenu } = props;
+  const { isPlay, playMusic, setIsShowPlayer, isShowPlayerMenu,setIsShowLyric,isShowLyric } = props;
   const dispatch = useDispatch();
   const { playList, sequence } = useSelector(
     (state: IRootState) => ({
@@ -44,6 +46,7 @@ const PlayerHandler: React.FC<IPlayerHandlerProps> = memo((props) => {
     }
     dispatch(changeSequenceAction(currentSequence));
   };
+
   return (
     <div className="player-handler-wrapper">
       <div onClick={() => changeMusic("previous")}>
@@ -59,6 +62,9 @@ const PlayerHandler: React.FC<IPlayerHandlerProps> = memo((props) => {
       <div onClick={() => changeMusic("next")}>
         <StepForwardOutlined />
       </div>
+        <div onClick={()=>setIsShowLyric(!isShowLyric)}>
+            <i className={`iconfont icon-geciweidianji ${isShowLyric && 'active'}`}></i>
+        </div>
       <div onClick={changeSequence}>
         <Tooltip
           title={
