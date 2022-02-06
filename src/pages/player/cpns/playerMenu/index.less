@@ -1,154 +1,156 @@
-.player-menu-wrapper{
+.player-menu-wrapper {
   position: fixed;
-  z-index:10000;
+  z-index: 10000;
   left: 0%;
   top: -33.5rem;
   height: 33.5rem;
   width: 95vw;
-  padding:0rem 1rem;
+  padding: 0rem 1rem;
   box-sizing: border-box;
-  border:1px solid #ccc;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
   left: 50%;
   background-color: #fff;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-  opacity: 0;
-  transform: scaleY(0) translateX(-50%);
+  transition: all 300ms cubic-bezier(0, 0, 0.2, 1);
 
-  &.show{
+  &.show {
     opacity: 1;
     transform: scaleY(1) translateX(-50%);
-    transition: all 300ms cubic-bezier(0, 0, 0.2, 1);
     transform-origin: bottom;
   }
 
-  .music-info{
+  &.hide {
+    opacity: 0;
+    transform: scaleY(0) translateX(-50%);
+  }
+
+  .music-info {
     margin-bottom: 3px;
     height: 30rem;
 
-
-    .music-info-title{
-      padding: .3rem;
+    .music-info-title {
+      padding: 0.3rem;
       box-sizing: border-box;
       font-weight: 700;
       text-align: center;
-      border-bottom: 1px solid #ccc;
-      border-right: 1px solid #ccc;
+      border-bottom: 1px solid #eee;
+      border-right: 1px solid #eee;
       line-height: 2rem;
+      height: 2.7rem;
     }
 
-    .music-lyric-wrapper{
+    .music-lyric-wrapper {
       text-align: center;
       height: 30rem;
       overflow-y: auto;
-      border-right: 1px solid #ccc;
+      border-right: 1px solid #eee;
+      font-size: 0.8rem;
+      .music-lyric {
+        line-height: 2rem;
 
-      .music-lyric{
-        line-height: 1.5rem;
-
-       &.active{
-         font-size: 1.2rem;
-       }
-     }
+        &.active {
+          font-size: 1.2rem;
+        }
+      }
     }
-
   }
 
   .music-list {
     width: 100%;
     height: 30rem;
-    .music-menu-title{
+    .music-menu-title {
       display: flex;
       line-height: 2rem;
       justify-content: space-between;
-      border-bottom: 1px solid #ccc;
-      padding: .3rem;
+      border-bottom: 1px solid #eee;
+      padding: 0.3rem;
       box-sizing: border-box;
 
-      .music-menu-icon{
+      .music-menu-icon {
         display: flex;
-        align-items:center;
+        align-items: center;
 
-        p{
-          margin-left: .2rem;
+        p {
+          margin-left: 0.2rem;
         }
       }
 
-      .music-menu-clear{
+      .music-menu-clear {
         display: flex;
         align-items: center;
-        cursor:pointer;
+        cursor: pointer;
 
-        .music-menu-close{
+        .music-menu-close {
           margin-left: 1rem;
         }
       }
     }
 
-    .music-menu-list{
-      padding:.3rem .3rem;
+    .music-menu-list {
+      padding: 0.3rem 0.3rem;
       height: 30rem;
       overflow-y: auto;
 
-      .music-menu-item{
+      .music-menu-item {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding:0 1rem;
+        padding: 0 1rem;
         position: relative;
         line-height: 1.5rem;
-        cursor:pointer;
-        transition: all .2s ease-in-out;
-        border-radius: .5rem;
-        margin-bottom: .2rem;
+        cursor: pointer;
+        font-size: 0.8rem;
+        transition: all 0.2s ease-in-out;
+        border-radius: 0.5rem;
+        margin-bottom: 0.5rem;
 
-        &:hover{
-          background-color: #ccc;
+        &:hover {
+          background-color: #eee;
         }
 
-        &.current-play{
-          background-color: #ccc;
+        &.current-play {
+          background-color: #eee;
 
-          &:before{
+          &:before {
             display: block;
-            content:"";
+            content: "";
             position: absolute;
             left: 0.3rem;
-            border-bottom: .4rem solid transparent;
-            border-top: .4rem solid transparent;
-            border-left: .4rem solid #0170fe;
-            border-right: .4rem solid transparent;
+            border-bottom: 0.4rem solid transparent;
+            border-top: 0.4rem solid transparent;
+            border-left: 0.4rem solid #0170fe;
+            border-right: 0.4rem solid transparent;
           }
         }
 
-        .music-name{
+        .music-name {
           width: 20%;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
         }
 
-        .singer-name{
+        .singer-name {
           width: 20%;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
         }
 
-        .music-handle{
+        .music-handle {
           width: 12%;
           display: flex;
           justify-content: space-between;
           opacity: 0;
         }
 
-        &:hover{
-          .music-handle{
-           opacity: 1;
+        &:hover {
+          .music-handle {
+            opacity: 1;
           }
         }
       }
     }
   }
-
 }

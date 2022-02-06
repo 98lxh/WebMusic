@@ -1,106 +1,37 @@
-import {
-  ContainerOutlined,
-  DownOutlined,
-  StepBackwardOutlined,
-  StepForwardOutlined,
-  UpOutlined,
-} from "@ant-design/icons";
-import { Badge, Col, Row, Slider } from "antd";
-import React, { memo, useCallback, useEffect, useRef, useState } from "react";
-import {shallowEqual, useDispatch, useSelector} from "react-redux";
-import { IRootState } from "../../store/reducer";
-import { formatDate } from "../../utils/format-utils";
-import {changeSequenceAction, getSongDetailAction,changeCurrentSong} from "./store/actionCreators";
-import "./index.less";
+import { DownOutlined, UpOutlined } from "@ant-design/icons";
+import { Col, Row } from "antd";
+import React, { memo, useCallback, useRef, useState } from "react";
 import PlayerMenu from "./cpns/playerMenu";
+import PlayerHandler from "./cpns/playerHandler";
+import PlayerAudio, { IAudioRef } from "./cpns/playerAudio";
+import PlayerInfo from "./cpns/playerInfo";
+import "./index.less";
+
 const PlayerBar: React.FC = memo(() => {
+  //显示隐藏播放栏
   const [showPlayer, setShowPlayer] = useState(true);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [isChange, setIsChange] = useState(false);
+  //是否在播放中
   const [isPlay, setIsPlay] = useState(false);
+  //进度条
+  const audioRef = useRef<IAudioRef>(null);
+  //显示隐藏播放菜单
   const [isShowPlayerMenu, setIsShowPlayerMenu] = useState(false);
-  const dispatch = useDispatch();
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const { currentSong,sequence,playList } = useSelector((state: IRootState) => ({
-    currentSong: state.playerBar.currentSong as any,
-    sequence:state.playerBar.sequence,
-    playList:state.playerBar.playList
-  }),shallowEqual);
-  const picUrl = (currentSong.al && currentSong.al.picUrl) || "";
-  const singerName = currentSong.ar && currentSong.ar[0].name;
-  const duration = currentSong.dt || 0;
+  //当前播放时间
+  const [currentTime, setCurrentTime] = useState(0);
+  //进度条是否在拖动中
+  const [isChange, setIsChange] = useState(false);
   const [progress, setProgress] = useState(0);
+
+  //播放 暂停
   const playMusic = useCallback(() => {
     isPlay ? audioRef.current?.pause() : audioRef.current?.play();
     setIsPlay(!isPlay);
   }, [isPlay]);
-  const timeUpdate = (event: React.UIEvent<HTMLAudioElement>) => {
-    if (isChange) return;
-    setCurrentTime(event.currentTarget.currentTime * 1000);
-    setProgress((currentTime / duration) * 100);
-  };
-  const handlePlayerMenu = (isShow: boolean) => {
-    setIsShowPlayerMenu(isShow);
-  };
+
   const closePlayerMenu = () => {
-    setIsShowPlayerMenu(false)
-  }
-  const sliderChange = useCallback(
-    (value: number) => {
-      const currentTime = (value / 100) * duration;
-      setIsChange(true);
-      setCurrentTime(currentTime);
-      setProgress(value);
-    },
-    [duration]
-  );
-  const sliderAfterChange = useCallback(
-    (value: number) => {
-      const currentTime = ((value / 100) * duration) / 1000;
-      audioRef.current!.currentTime = currentTime;
-      setCurrentTime(currentTime * 1000);
-      setIsChange(false);
-      if (!isPlay) {
-        playMusic();
-      }
-    },
-    [duration, isPlay, playMusic]
-  );
-  //切换列表循环和单曲循环
-  const changeSequence = () => {
-    let currentSequence = sequence + 1
-    if(currentSequence > 2){
-      currentSequence = 0
-    }
-    dispatch(changeSequenceAction(currentSequence))
-  }
-  //切换上一首和下一首歌曲
-  const changeMusic = (tag:'previous' | 'next') => {
-    dispatch(changeCurrentSong(tag))
-  }
-  //监听播放结束
-  const handleEnded = () => {
-    if(sequence === 0){
-      //单曲循环
-      audioRef.current!.play()
-    }else{
-      //非单曲循环
-      dispatch(changeCurrentSong('next'))
-    }
-  }
-  useEffect(() => {
-    dispatch(getSongDetailAction(1430583016));
-  }, [dispatch]);
-  useEffect(() => {
-    audioRef.current!.src = "https://music.163.com/song/media/outer/url?id=" +
-      currentSong.id +
-      ".mp3";
-    audioRef.current!.play().then(() => {
-      setIsPlay(true)
-    }).catch(()=>{
-      setIsPlay(false)
-    })
-  }, [currentSong]);
+    setIsShowPlayerMenu(false);
+  };
+
   const togglePlayer = () => {
     setShowPlayer(!showPlayer);
   };
@@ -113,64 +44,36 @@ const PlayerBar: React.FC = memo(() => {
         </div>
         <Row gutter={24} justify="center" style={{ width: "100%" }}>
           <Col sm={24} xs={24} md={16} lg={16} xl={16} className="play-info">
-            <div className="image">
-              <img src={picUrl} alt="" />
-            </div>
-            <div className="info">
-              <div className="song">
-                <span className="song-name">{currentSong.name}</span>
-                <span className="singer-name">{singerName}</span>
-              </div>
-              <div className="progress">
-                <div className="progress-bar">
-                  <Slider
-                    onChange={sliderChange}
-                    tooltipVisible={false}
-                    onAfterChange={sliderAfterChange}
-                    defaultValue={30}
-                    value={progress}
-                  />
-                </div>
-                <div className="time-info">
-                  <span className="now-time">{formatDate(currentTime)}</span>
-                  <span className="divider">/</span>
-                  <span className="end-time">{formatDate(duration)}</span>
-                </div>
-              </div>
-            </div>
+            <PlayerInfo
+              progress={progress}
+              setProgress={setProgress}
+              isPlay={isPlay}
+              playMusic={playMusic}
+              audio={audioRef.current!}
+              setIsChange={setIsChange}
+              currentTime={currentTime}
+              setCurrentTime={setCurrentTime}
+            />
           </Col>
-          <Col sm={24} xs={24} md={8} lg={8} xl={8} className="updn">
-            <div onClick={()=>changeMusic('previous')}>
-              <StepBackwardOutlined />
-            </div>
-            <div onClick={playMusic}>
-              <i
-                className={`iconfont ${
-                  isPlay ? "icon-24gf-pause2" : "icon-shipinbofangshibofang"
-                }`}
-               />
-            </div>
-            <div onClick={()=>changeMusic('next')}>
-              <StepForwardOutlined  />
-            </div>
-            <div onClick={changeSequence}>
-              <i className={`iconfont 
-              ${sequence === 0 ? ' icon-danquxunhuan' : 
-                sequence === 1 ?  'icon-suijibofang' : 
-                'icon-liebiaoxunhuan'
-              }`} />
-            </div>
-            <div>
-              <Badge count={playList.length}>
-                <ContainerOutlined className={`player-menu-btn ${isShowPlayerMenu && 'active'}`}
-                  onClick={()=>{setIsShowPlayerMenu(!isShowPlayerMenu)}}
-                />
-              </Badge>
-            </div>
+          <Col sm={24} xs={24} md={8} lg={8} xl={8}>
+            <PlayerHandler
+              isPlay={isPlay}
+              isShowPlayerMenu={isShowPlayerMenu}
+              setIsShowPlayer={setIsShowPlayerMenu}
+              playMusic={playMusic}
+            />
           </Col>
         </Row>
+        <PlayerAudio
+          isChange={isChange}
+          ref={audioRef}
+          setIsPlay={setIsPlay}
+          isPlay={isPlay}
+          setProgress={setProgress}
+          setCurrentTime={setCurrentTime}
+          currentTime={currentTime}
+        />
       </div>
-      <audio ref={audioRef} onTimeUpdate={timeUpdate} onEnded={handleEnded} />
     </div>
   );
 });
