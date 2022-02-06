@@ -3,3 +3,6 @@ const PRO_BASE_URL = "http://production.org";
 export const BASE_URL =
     process.env.NODE_ENV === "development" ? DEV_BASE_URL : PRO_BASE_URL;
 export const TIMEOUT = 10000;
+
+
+export const origin = 'netease'

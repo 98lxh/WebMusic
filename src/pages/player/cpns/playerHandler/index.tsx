@@ -46,7 +46,6 @@ const PlayerHandler: React.FC<IPlayerHandlerProps> = memo((props) => {
     }
     dispatch(changeSequenceAction(currentSequence));
   };
-
   return (
     <div className="player-handler-wrapper">
       <div onClick={() => changeMusic("previous")}>

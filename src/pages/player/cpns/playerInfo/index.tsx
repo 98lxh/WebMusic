@@ -5,6 +5,7 @@ import { formatDate } from "../../../../utils/format-utils";
 import { IAudioRef } from "../playerAudio";
 import { Slider } from "antd";
 import "./index.less";
+import {IMusicInfo} from "../../store/reducer";
 interface IPlayInfoProps {
   isPlay: boolean;
   audio: IAudioRef;
@@ -28,12 +29,12 @@ const PlayerInfo: React.FC<IPlayInfoProps> = memo((props) => {
   } = props;
 
   const { currentSong } = useSelector((state: IRootState) => ({
-    currentSong: state.playerBar.currentSong,
+    currentSong: state.playerBar.currentSong as IMusicInfo,
   }));
 
-  const picUrl = (currentSong.al && currentSong.al.picUrl) || "";
-  const singerName = currentSong.ar && currentSong.ar[0].name;
-  const duration = currentSong.dt || 0;
+  const picUrl = currentSong?.picUrl;
+  const singerName = currentSong?.singerName;
+  const duration = currentSong?.duration || 0;
 
   //滑动进度条
   const sliderChange = useCallback(
@@ -67,7 +68,7 @@ const PlayerInfo: React.FC<IPlayInfoProps> = memo((props) => {
       </div>
       <div className="info">
         <div className="song">
-          <span className="song-name">{currentSong.name}</span>
+          <span className="song-name">{currentSong?.name}</span>
           <span className="singer-name">{singerName}</span>
         </div>
         <div className="progress">
@@ -76,7 +77,6 @@ const PlayerInfo: React.FC<IPlayInfoProps> = memo((props) => {
               onChange={sliderChange}
               tooltipVisible={false}
               onAfterChange={sliderAfterChange}
-              defaultValue={30}
               value={progress}
             />
           </div>

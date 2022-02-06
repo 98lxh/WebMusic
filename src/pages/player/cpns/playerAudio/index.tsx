@@ -19,8 +19,8 @@ interface PlayerAudioProps {
   currentTime: number;
   setCurrentTime: (value: number) => void;
   isChange: boolean;
-    setCurrentLyricIndex:(value:number) => void;
-    currentLyricIndex:number
+  setCurrentLyricIndex:(value:number) => void;
+  currentLyricIndex:number
 }
 
 export interface IAudioRef {
@@ -40,7 +40,7 @@ const PlayerAudio = forwardRef<IAudioRef, PlayerAudioProps>(
       }),
       shallowEqual
     );
-    const duration = currentSong.dt || 0;
+    const duration = currentSong.duration || 0;
     const dispatch = useDispatch();
 
     useImperativeHandle<any, IAudioRef>(
@@ -76,7 +76,7 @@ const PlayerAudio = forwardRef<IAudioRef, PlayerAudioProps>(
     }, [currentSong, setIsPlay]);
 
     useEffect(() => {
-      dispatch(getSongDetailAction(playList[0].id));
+        playList.length && dispatch(getSongDetailAction(playList[0].id));
     }, [dispatch,playList[0]]);
 
     const timeUpdate = (event: React.UIEvent<HTMLAudioElement>) => {

@@ -13,12 +13,11 @@ export class Service{
         })
    }
 
-   request<T>(config:IRequestConfig<T>):Promise<AxiosResponse<T>> {
+   request<T = any, M = any>(config:IRequestConfig<T>,machiningRes?:M):Promise<T & M | T>  {
        return new Promise((resolve, reject) => {
            if (config.interceptors?.requestInterceptor) {
                config = config.interceptors.requestInterceptor(config);
            }
-
            this.instance!
                .request<any, AxiosResponse<T>>(config)
                .then((res) => {
@@ -27,8 +26,13 @@ export class Service{
                            res as any
                        );
                    }
-
-                   resolve(res);
+                   //加工响应
+                   if(machiningRes){
+                       const newRes = {...res.data,...machiningRes}
+                       resolve(newRes);
+                   }else{
+                       resolve(res.data);
+                   }
                })
                .catch((error) => {
                    reject(error);
@@ -39,7 +43,7 @@ export class Service{
     requestLoadWithElement<T>(
         config: IRequestConfig<T>,
         loadElm: Element
-    ): Promise<AxiosResponse<T>>  {
+    ): Promise<T>  {
         config.interceptors = {};
         config.interceptors!.requestInterceptor = (config) => {
             ReactDOM.render(
@@ -66,7 +70,7 @@ export class Service{
                     if (config.interceptors!.responseInterceptor) {
                         (res as any) = config.interceptors!.responseInterceptor(res as any);
                     }
-                    resolve(res);
+                    resolve(res.data);
                 })
                 .catch((error) => {
                     loadElm.parentElement?.removeChild(loadElm);

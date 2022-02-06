@@ -2,32 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bcafd5fd-5b36-4b6c-b9bc-e71ae97a14fe" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/player/cpns/playerLyric/index.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/player/cpns/playerLyric/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/service/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/service/module/netease/config.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/service/module/netease/module/player.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/service/module/netease/module/recommend.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/service/module/netease/module/types/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/service/module/netease/service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/search/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/service/module/netease/module/search.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/format-musicInfo.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/less/icon.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/less/icon.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/TopRanking/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TopRanking/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/GlobalHeader/cpns/HeaderSearch/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GlobalHeader/cpns/HeaderSearch/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/discover/c-pages/recommend/store/actionCreators.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/discover/c-pages/recommend/store/actionCreators.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/discover/c-pages/recommend/store/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/discover/c-pages/recommend/store/reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/discover/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/discover/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/player/cpns/playerAudio/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/player/cpns/playerAudio/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/player/cpns/playerHandler/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/player/cpns/playerHandler/index.less" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/player/cpns/playerHandler/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/player/cpns/playerHandler/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/player/cpns/playerMenu/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/player/cpns/playerMenu/index.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/player/cpns/playerInfo/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/player/cpns/playerInfo/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/player/cpns/playerMenu/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/player/cpns/playerMenu/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/player/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/player/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/player/store/actionCreators.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/player/store/actionCreators.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/module/player.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/module/recommend.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/module/types/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/request.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/requestPro.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/player/store/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/player/store/reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/module/netease/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/module/netease/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/module/netease/module/player.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/module/netease/module/player.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +75,7 @@
       <workItem from="1643030368701" duration="3837000" />
       <workItem from="1643801916067" duration="4915000" />
       <workItem from="1643882110671" duration="39504000" />
-      <workItem from="1644132516309" duration="8320000" />
+      <workItem from="1644132516309" duration="14982000" />
     </task>
     <servers />
   </component>
@@ -104,17 +93,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/pages/player/cpns/playerMenu/index.tsx</url>
-          <line>27</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

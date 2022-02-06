@@ -19,7 +19,7 @@ const changeTopBannerAction = (res: IRecommendBannners) => ({
 export const getTopBannerAction =
   (loadElm: Element) => (dispatch: Dispatch<any>) => {
     getTopBanners(loadElm).then((res) => {
-      dispatch(changeTopBannerAction(res.data));
+      dispatch(changeTopBannerAction(res));
     });
   };
 
@@ -31,7 +31,7 @@ const changeHotRecommendsAction = (res: IHotRecommend) => ({
 export const getHotRecommendAction =
   (loadElm: Element) => (dispatch: Dispatch<any>) => {
     getHotRecommends(loadElm).then((res) => {
-      dispatch(changeHotRecommendsAction(res.data));
+      dispatch(changeHotRecommendsAction(res));
     });
   };
 
@@ -54,13 +54,13 @@ export const getTopListAction = (idx: number) => (dispatch: Dispatch<any>) => {
   getTopList(idx).then((res) => {
     switch (idx) {
       case 0:
-        dispatch(changeNewRankingAction(res.data));
+        dispatch(changeNewRankingAction(res));
         break;
       case 2:
-        dispatch(changeOriginRankingAction(res.data));
+        dispatch(changeOriginRankingAction(res));
         break;
       case 3:
-        dispatch(changeUpRankingAction(res.data));
+        dispatch(changeUpRankingAction(res));
         break;
     }
   });

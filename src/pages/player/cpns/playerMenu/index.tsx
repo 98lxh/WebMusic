@@ -12,6 +12,7 @@ import { IRootState } from "../../../../store/reducer";
 import { formatDate } from "../../../../utils/format-utils";
 import { changeCurrentSong } from "../../store/actionCreators";
 import "./index.less";
+import {IMusicInfo} from "../../store/reducer";
 
 interface IPlayMenuProps {
   isShow: boolean;
@@ -24,7 +25,7 @@ const playerMenu: React.FC<IPlayMenuProps> = memo((props) => {
   const { playList, currentSong, currentLyric } = useSelector(
     (state: IRootState) => ({
       playList: state.playerBar.playList,
-      currentSong: state.playerBar.currentSong,
+      currentSong: state.playerBar.currentSong as IMusicInfo,
       currentLyric: state.playerBar.currentLyric,
     }),
     shallowEqual
@@ -43,6 +44,7 @@ const playerMenu: React.FC<IPlayMenuProps> = memo((props) => {
           <div className="music-info-title">{currentSong.name}</div>
           <div className="music-lyric-wrapper" ref={lyricRef}>
             {currentLyric.map((lyricObj, index) => (
+
               <p
                 key={index}
                 className={`music-lyric ${index === currentLyricIndex && "active"}`}
@@ -80,8 +82,8 @@ const playerMenu: React.FC<IPlayMenuProps> = memo((props) => {
                   <DownloadOutlined />
                   <DeleteOutlined />
                 </div>
-                <p className="singer-name">{music.ar[0].name}</p>
-                <p className="music-time">{formatDate(music.dt)}</p>
+                <p className="singer-name">{music.singerName}</p>
+                <p className="music-time">{formatDate(music.duration)}</p>
                 <ShareAltOutlined />
               </li>
             ))}
