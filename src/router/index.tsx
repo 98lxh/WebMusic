@@ -9,6 +9,7 @@ import Recommend from "../pages/discover/c-pages/recommend";
 import Songs from "../pages/discover/c-pages/songs";
 import Friend from "../pages/friend";
 import Profile from "../pages/profile";
+import Search from "../pages/search";
 const Router = () => {
   return useRoutes([
     {
@@ -60,6 +61,10 @@ const Router = () => {
         {
           path: "friends",
           element: <Friend />,
+        },
+        {
+          path: "search/:keyword",
+          element: <Search />,
         },
       ],
     },

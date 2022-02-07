@@ -1,18 +1,21 @@
 import React, { memo } from "react";
-import { TopPlayList,TopPlayListTrack } from "../../service/module/netease/module/types";
+import {
+  TopPlayList,
+  TopPlayListTrack,
+} from "../../service/module/netease/module/types";
 import { CaretRightOutlined, PlusOutlined } from "@ant-design/icons";
-import {getSongDetailAction} from '../../pages/player/store/actionCreators'
+import { getSongDetailAction } from "../../pages/player/store/actionCreators";
+import { useDispatch } from "react-redux";
 import "./index.less";
-import {useDispatch} from "react-redux";
 
 interface TopRankingProps {
   rankingInfo: TopPlayList;
 }
 const TopRanking: React.FC<TopRankingProps> = memo(({ rankingInfo }) => {
   const dispatch = useDispatch();
-  const playMusic = (music:TopPlayListTrack) => {
-      dispatch(getSongDetailAction(music.id))
-  }
+  const playMusic = (music: TopPlayListTrack) => {
+    dispatch(getSongDetailAction(music.id, "netease"));
+  };
   return (
     <div className="top-ranking-wrapper">
       <div className="ranking-header">
@@ -31,7 +34,11 @@ const TopRanking: React.FC<TopRankingProps> = memo(({ rankingInfo }) => {
             </p>
             <p className="muisc-name">{music.name}</p>
             <div className="muisc-handle">
-              <CaretRightOutlined onClick={()=>{playMusic(music)}} />
+              <CaretRightOutlined
+                onClick={() => {
+                  playMusic(music);
+                }}
+              />
               <PlusOutlined />
             </div>
           </div>

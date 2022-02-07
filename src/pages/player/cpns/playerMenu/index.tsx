@@ -1,5 +1,5 @@
 import { Col, Row } from "antd";
-import React, {memo, useEffect, useRef} from "react";
+import React, { memo, useEffect, useRef } from "react";
 import {
   DeleteOutlined,
   ShareAltOutlined,
@@ -12,16 +12,16 @@ import { IRootState } from "../../../../store/reducer";
 import { formatDate } from "../../../../utils/format-utils";
 import { changeCurrentSong } from "../../store/actionCreators";
 import "./index.less";
-import {IMusicInfo} from "../../store/reducer";
+import { IMusicInfo } from "../../store/reducer";
 
 interface IPlayMenuProps {
   isShow: boolean;
-  currentLyricIndex:number;
+  currentLyricIndex: number;
   onClose: () => void;
 }
 const playerMenu: React.FC<IPlayMenuProps> = memo((props) => {
-  const {currentLyricIndex} = props;
-  const lyricRef = useRef<HTMLDivElement>(null)
+  const { currentLyricIndex } = props;
+  const lyricRef = useRef<HTMLDivElement>(null);
   const { playList, currentSong, currentLyric } = useSelector(
     (state: IRootState) => ({
       playList: state.playerBar.playList,
@@ -30,9 +30,9 @@ const playerMenu: React.FC<IPlayMenuProps> = memo((props) => {
     }),
     shallowEqual
   );
-  useEffect(()=>{
-    lyricRef.current!.scrollTop = 25 * currentLyricIndex
-  },[currentLyricIndex])
+  useEffect(() => {
+    lyricRef.current!.scrollTop = 25 * currentLyricIndex;
+  }, [currentLyricIndex]);
   const dispatch = useDispatch();
   const changeMusic = (musicIndex: number) => {
     dispatch(changeCurrentSong("next", musicIndex));
@@ -44,10 +44,11 @@ const playerMenu: React.FC<IPlayMenuProps> = memo((props) => {
           <div className="music-info-title">{currentSong.name}</div>
           <div className="music-lyric-wrapper" ref={lyricRef}>
             {currentLyric.map((lyricObj, index) => (
-
               <p
                 key={index}
-                className={`music-lyric ${index === currentLyricIndex && "active"}`}
+                className={`music-lyric ${
+                  index === currentLyricIndex && "active"
+                }`}
               >
                 {lyricObj.content}
               </p>
@@ -84,7 +85,11 @@ const playerMenu: React.FC<IPlayMenuProps> = memo((props) => {
                 </div>
                 <p className="singer-name">{music.singerName}</p>
                 <p className="music-time">{formatDate(music.duration)}</p>
-                <ShareAltOutlined />
+                <img
+                  src={`/imgs/ico/${
+                    music.origin === "netease" ? "netease.png" : "bbbug.ico"
+                  }`}
+                ></img>
               </li>
             ))}
           </ul>

@@ -1,41 +1,61 @@
 import { Dispatch } from "react";
-import { getLyric, getSongDetail_netease } from "../../../service/module/netease/module/player";
+import {
+  getLRC_NETEASE,
+  getSongDetail_netease,
+} from "../../../service/module/netease/module/player";
 import actionTypes from "./constant";
 import { ILyric, parseLyric } from "../../../utils/parse-lyric";
-import {formatMusicInfo} from "../../../utils/format-musicInfo";
+import { formatMusicInfo } from "../../../utils/format-musicInfo";
+import { getLRC_BBBUG } from "../../../service/module/bbbug/module/player";
 
 const changeCurrentSongAction = (currentSong: any) => ({
   type: actionTypes.CHANGE_CURRENT_SONG,
   currentSong,
 });
 
-export const getSongDetailAction = (ids: number) => {
+export const getSongDetailAction = (
+  ids: number,
+  origin: string,
+  bbbugSongInfo?: any
+) => {
   return (dispatch: Dispatch<any>, getState: any) => {
-    getSongDetail_netease(ids).then((res) => {
-      let song = null;
-      // 根据id查找playList中是否存在该歌曲
-      const playerList = getState().playerBar.playList;
-      const index = playerList.findIndex((song: any) => song.id === ids);
-      //是否找到歌曲
-      if (index !== -1) {
-        //找到歌曲
-        dispatch(changeCurrentSongIndexAction(index));
-        song = playerList[index];
-        dispatch(changeCurrentSongAction(song));
-      } else {
-        song = res.songs && formatMusicInfo(res);
-        console.log(song)
-        if (!song) return;
-        const newPlayList = [...playerList, song];
-        dispatch(changePlayListAction(newPlayList));
-        dispatch(changeCurrentSongIndexAction(newPlayList.length - 1));
-        dispatch(changeCurrentSongAction(newPlayList[newPlayList.length - 1]));
-      }
-
+    //根据id查找playList中是否存在歌曲
+    let song = null;
+    const playerList = getState().playerBar.playList;
+    const index = playerList.findIndex((song: any) => song.id === ids);
+    if (index !== -1) {
+      dispatch(changeCurrentSongIndexAction(index));
+      song = playerList[index];
+      dispatch(changeCurrentSongAction(song));
       //请求歌词
-      if (!song) return;
-      dispatch(getLyricAction(song.id));
-    });
+      dispatch(getLyricAction(song.id, origin));
+    } else {
+      //列表中不存在该歌曲
+      //区分来源
+      switch (origin) {
+        case "netease":
+          getSongDetail_netease(ids).then((res) => {
+            song = res.songs && formatMusicInfo(res, origin);
+            if (!song) return;
+            const newPlayList = [...playerList, song];
+            dispatch(changePlayListAction(newPlayList));
+            dispatch(changeCurrentSongIndexAction(newPlayList.length - 1));
+            dispatch(changeCurrentSongAction(song));
+            //请求歌词
+            dispatch(getLyricAction(song.id, origin));
+          });
+          break;
+        default:
+          song = formatMusicInfo(bbbugSongInfo, origin);
+          const newPlayList = [...playerList, song];
+          dispatch(changePlayListAction(newPlayList));
+          dispatch(changeCurrentSongIndexAction(newPlayList.length - 1));
+          dispatch(changeCurrentSongAction(song));
+          //请求歌词
+          dispatch(getLyricAction(song!.id, origin));
+          break;
+      }
+    }
   };
 };
 
@@ -52,7 +72,7 @@ export const changeCurrentSong = (
       const currentSong = playList[musicIndex];
       dispatch(changeCurrentSongAction(currentSong));
       dispatch(changeCurrentSongIndexAction(currentSongIndex));
-      dispatch(getLyricAction(currentSong.id));
+      dispatch(getLyricAction(currentSong.id, currentSong.origin));
       return false;
     }
     switch (sequence) {
@@ -80,7 +100,7 @@ export const changeCurrentSong = (
     const currentSong = playList[currentSongIndex];
     dispatch(changeCurrentSongAction(currentSong));
     dispatch(changeCurrentSongIndexAction(currentSongIndex));
-    dispatch(getLyricAction(currentSong.id));
+    dispatch(getLyricAction(currentSong.id, currentSong.origin));
   };
 };
 
@@ -106,12 +126,24 @@ export const changeCurrentLyricAction = (currentLyric: ILyric[]) => ({
 });
 
 //获取歌词
-export const getLyricAction = (id: number) => {
+export const getLyricAction = (id: number, origin: string) => {
+  console.log(origin);
   return (dispatch: Dispatch<any>) => {
-    getLyric(id).then((res) => {
-      const lyricString = res.lrc.lyric;
-      const lyricList = parseLyric(lyricString);
-      dispatch(changeCurrentLyricAction(lyricList));
-    });
+    switch (origin) {
+      case "netease":
+        getLRC_NETEASE(id).then((res) => {
+          const lyricString = res.lrc.lyric;
+          const lyricList = parseLyric(lyricString, origin);
+          dispatch(changeCurrentLyricAction(lyricList));
+        });
+        break;
+      default:
+        getLRC_BBBUG(id).then((res) => {
+          const lyricString = res.data;
+          const lyricList = parseLyric(lyricString, origin);
+          dispatch(changeCurrentLyricAction(lyricList));
+        });
+        break;
+    }
   };
 };

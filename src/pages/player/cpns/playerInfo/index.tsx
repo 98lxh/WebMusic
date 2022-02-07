@@ -5,7 +5,7 @@ import { formatDate } from "../../../../utils/format-utils";
 import { IAudioRef } from "../playerAudio";
 import { Slider } from "antd";
 import "./index.less";
-import {IMusicInfo} from "../../store/reducer";
+import { IMusicInfo } from "../../store/reducer";
 interface IPlayInfoProps {
   isPlay: boolean;
   audio: IAudioRef;
@@ -32,8 +32,8 @@ const PlayerInfo: React.FC<IPlayInfoProps> = memo((props) => {
     currentSong: state.playerBar.currentSong as IMusicInfo,
   }));
 
-  const picUrl = currentSong?.picUrl;
-  const singerName = currentSong?.singerName;
+  const picUrl = currentSong?.picUrl || "/imgs/ico/bbbug.ico";
+  const singerName = currentSong?.singerName || "歌单暂无歌曲";
   const duration = currentSong?.duration || 0;
 
   //滑动进度条

@@ -19,8 +19,8 @@ interface PlayerAudioProps {
   currentTime: number;
   setCurrentTime: (value: number) => void;
   isChange: boolean;
-  setCurrentLyricIndex:(value:number) => void;
-  currentLyricIndex:number
+  setCurrentLyricIndex: (value: number) => void;
+  currentLyricIndex: number;
 }
 
 export interface IAudioRef {
@@ -29,14 +29,25 @@ export interface IAudioRef {
   setCurrentTime: (currentTime: number) => void;
 }
 const PlayerAudio = forwardRef<IAudioRef, PlayerAudioProps>(
-  ({ setIsPlay, setProgress, isChange, setCurrentTime, currentTime,currentLyricIndex,setCurrentLyricIndex }, ref) => {
+  (
+    {
+      setIsPlay,
+      setProgress,
+      isChange,
+      setCurrentTime,
+      currentTime,
+      currentLyricIndex,
+      setCurrentLyricIndex,
+    },
+    ref
+  ) => {
     const audioRef = useRef<HTMLAudioElement>(null);
-    const { currentSong, sequence, playList,lyric } = useSelector(
+    const { currentSong, sequence, playList, lyric } = useSelector(
       (state: IRootState) => ({
         currentSong: state.playerBar.currentSong as any,
         playList: state.playerBar.playList,
         sequence: state.playerBar.sequence,
-          lyric:state.playerBar.currentLyric
+        lyric: state.playerBar.currentLyric,
       }),
       shallowEqual
     );
@@ -60,11 +71,12 @@ const PlayerAudio = forwardRef<IAudioRef, PlayerAudioProps>(
     );
 
     useEffect(() => {
-        console.log('切换')
       audioRef.current!.src =
-        "https://music.163.com/song/media/outer/url?id=" +
-        currentSong.id +
-        ".mp3";
+        currentSong.origin === "netease"
+          ? "https://music.163.com/song/media/outer/url?id=" +
+            currentSong.id +
+            ".mp3"
+          : "https://api.bbbug.com/api/song/playurl?mid=" + currentSong.id;
       audioRef
         .current!.play()
         .then(() => {
@@ -76,8 +88,9 @@ const PlayerAudio = forwardRef<IAudioRef, PlayerAudioProps>(
     }, [currentSong, setIsPlay]);
 
     useEffect(() => {
-        playList.length && dispatch(getSongDetailAction(playList[0].id));
-    }, [dispatch,playList[0]]);
+      playList.length &&
+        dispatch(getSongDetailAction(playList[0].id, playList[0].origin));
+    }, [dispatch, playList[0]]);
 
     const timeUpdate = (event: React.UIEvent<HTMLAudioElement>) => {
       if (isChange) return;
@@ -85,16 +98,16 @@ const PlayerAudio = forwardRef<IAudioRef, PlayerAudioProps>(
       setProgress((currentTime / duration) * 100);
 
       //获取当前歌词
-        let lyricIndex = 0;
-        for(let i = 0; i < lyric.length;i++){
-            let lyricItem = lyric[i]
-            if(currentTime < lyricItem.time){
-                lyricIndex = i - 1
-                break
-            }
+      let lyricIndex = 0;
+      for (let i = 0; i < lyric.length; i++) {
+        let lyricItem = lyric[i];
+        if (currentTime < lyricItem.time) {
+          lyricIndex = i - 1;
+          break;
         }
+      }
 
-        currentLyricIndex !== lyricIndex && setCurrentLyricIndex(lyricIndex)
+      currentLyricIndex !== lyricIndex && setCurrentLyricIndex(lyricIndex);
     };
 
     //监听播放结束

@@ -3,12 +3,12 @@ import actionTypes from "./constant";
 import { ILyric } from "../../../utils/parse-lyric";
 
 export interface IMusicInfo {
-  origin:string,
-  name:string,
-  duration:number,
-  singerName:string,
-  picUrl:string,
-  id:number
+  origin: string;
+  name: string;
+  duration: number;
+  singerName: string;
+  picUrl: string;
+  id: number;
 }
 
 export interface IPlayerBarState {
@@ -18,18 +18,8 @@ export interface IPlayerBarState {
   currentLyric: ILyric[];
 }
 
-
 const defaultState = {
-  playList: [
-    {
-      duration: 168378,
-      id: 1914692581,
-      name: 'xxx',
-      origin: "netease",
-      picUrl: "https://p1.music.126.net/dT914ZDRTeIQYVnHtRUWug==/109951166974912911.jpg",
-      singerName: "冰冷端",
-    }
-  ],
+  playList: [],
   currentSongIndex: 0,
   currentSong: {},
   sequence: 0, //0 单曲 1随机 //2顺序
