@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { Menu } from "antd";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 type HeaderMenuType = {
   title: string;
@@ -14,6 +14,7 @@ interface IHeaderMenuProps {
 
 const HeaderMenu: React.FC<IHeaderMenuProps> = memo((props) => {
   const { menuList, height } = props;
+  const location = useLocation();
 
   const menuStyle = () => ({
     height: height ? height : "4rem",
@@ -21,9 +22,9 @@ const HeaderMenu: React.FC<IHeaderMenuProps> = memo((props) => {
   });
 
   return (
-    <Menu mode="horizontal" style={menuStyle()} defaultActiveFirst>
+    <Menu mode="horizontal" style={menuStyle()} activeKey={location.pathname}>
       {menuList.map((route) => (
-        <Menu.Item key={route.title}>
+        <Menu.Item key={route.link}>
           <NavLink to={route.link}>{route.title}</NavLink>
         </Menu.Item>
       ))}
