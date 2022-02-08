@@ -12,6 +12,7 @@ const HeaderSearch: React.FC = () => {
       return;
     }
     navigate(`/search/${keyword}`);
+    setKeyword("");
   };
   return (
     <Input.Search

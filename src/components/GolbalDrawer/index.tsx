@@ -4,27 +4,22 @@ import { Button, Drawer, DrawerProps } from "antd";
 import "./index.less";
 
 interface IGolbalDrawerProps {
-  triggerTitle?: string;
+  icon?: React.ReactElement;
 }
 const GolbalDrawer: React.FC<IGolbalDrawerProps & DrawerProps> = memo(
   (props) => {
-    const { children, triggerTitle, ...drawerProps } = props;
+    const { children, icon, ...drawerProps } = props;
     const [visible, setVisible] = useState(false);
 
     return (
       <div className="golbal-drawer-wraper">
-        <Button
-          type="primary"
-          className="drawer-trigger"
-          onClick={() => setVisible(true)}
-        >
-          {triggerTitle!.split("").map((ch, index) => (
-            <div key={index}>{ch}</div>
-          ))}
+        <Button className="drawer-trigger" onClick={() => setVisible(true)}>
+          {icon}
         </Button>
         <Drawer
           visible={visible}
           onClose={() => setVisible(false)}
+          getContainer={false}
           destroyOnClose
           {...drawerProps}
         >
@@ -34,8 +29,5 @@ const GolbalDrawer: React.FC<IGolbalDrawerProps & DrawerProps> = memo(
     );
   }
 );
-GolbalDrawer.defaultProps = {
-  triggerTitle: "展开",
-};
 
 export default GolbalDrawer;

@@ -9,12 +9,14 @@ import { FireOutlined } from "@ant-design/icons";
 const HotRecommed: React.FC = memo(() => {
   const dispatch = useDispatch();
   const loadingRef = useRef<HTMLDivElement>(null);
+
   const { hopRecommends } = useSelector(
     (state: IRootState) => ({
       hopRecommends: state.recommend.hotRecommends,
     }),
     shallowEqual
   );
+
   useEffect(() => {
     if (!hopRecommends.length) {
       dispatch(getHotRecommendAction(loadingRef.current!));

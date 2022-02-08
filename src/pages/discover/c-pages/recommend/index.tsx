@@ -1,5 +1,4 @@
 import React, { memo } from "react";
-import GolbalDrawer from "../../../../components/GolbalDrawer";
 import Banner from "./cpns/Banner";
 import HotRecommed from "./cpns/HotRecommend";
 import RankingRecommend from "./cpns/RankingRecommend";
@@ -13,7 +12,6 @@ const Recommend: React.FC = memo(() => {
         <HotRecommed />
         <RankingRecommend />
       </div>
-      <GolbalDrawer title="入驻歌手/热门主播"></GolbalDrawer>
     </div>
   );
 });

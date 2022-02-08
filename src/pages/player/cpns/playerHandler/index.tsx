@@ -81,7 +81,7 @@ const PlayerHandler: React.FC<IPlayerHandlerProps> = memo((props) => {
       <div
         className={`handle 
         ${IS_DISABLED && "disabled"} 
-        ${isShowLyric && "active"}`}
+        ${isShowLyric && !IS_DISABLED && "active"}`}
         onClick={() => setIsShowLyric(!isShowLyric)}
       >
         <i className={`iconfont icon-geciweidianji`}></i>

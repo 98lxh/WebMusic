@@ -6,6 +6,8 @@ import GlobalHeader from "../components/GlobalHeader";
 import GlobalFooter from "../components/GlobalFooter";
 import PlayerBar from "../pages/player";
 import "./index.less";
+import GolbalDrawer from "../components/GolbalDrawer";
+import { SettingFilled } from "@ant-design/icons";
 const Layout: React.FC = memo(() => {
   const location = useLocation();
   return (
@@ -21,6 +23,7 @@ const Layout: React.FC = memo(() => {
         </CSSTransition>
       </TransitionGroup>
       <PlayerBar />
+      <GolbalDrawer title="设置" icon={<SettingFilled />}></GolbalDrawer>
       <GlobalFooter />
     </div>
   );
