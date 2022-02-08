@@ -43,7 +43,7 @@
     .music-lyric-wrapper {
       text-align: center;
       height: 30rem;
-      overflow-y: auto;
+      overflow: scroll;
       border-right: 1px solid #eee;
       font-size: 0.8rem;
       .music-lyric {
@@ -51,7 +51,8 @@
         transition: all 0.3s ease-in-out;
 
         &.active {
-          font-size: 1.1rem;
+          font-weight: bold;
+          font-size: 0.9rem;
         }
       }
     }

@@ -127,7 +127,6 @@ export const changeCurrentLyricAction = (currentLyric: ILyric[]) => ({
 
 //获取歌词
 export const getLyricAction = (id: number, origin: string) => {
-  console.log(origin);
   return (dispatch: Dispatch<any>) => {
     switch (origin) {
       case "netease":

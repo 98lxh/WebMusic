@@ -14,12 +14,9 @@ const PlayerLyric: React.FC<IPlayerLyricProps> = memo((props) => {
   }));
   return (
     <div className="player-lyric-wrapper">
-      <p>
-        {lyricList.length > 0 &&
-          lyricIndex !== -1 &&
-          lyricList[lyricIndex] &&
-          lyricList[lyricIndex].content}
-      </p>
+      {lyricList[lyricIndex] && lyricList[lyricIndex].content.trim() && (
+        <p>{lyricList[lyricIndex].content}</p>
+      )}
     </div>
   );
 });

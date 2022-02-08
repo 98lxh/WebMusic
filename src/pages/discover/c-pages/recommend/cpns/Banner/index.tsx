@@ -28,7 +28,7 @@ const Banner: React.FC = () => {
         <Carousel effect={"fade"} autoplay>
           {topBanners.map((banner) => (
             <div className="banner-item" key={banner.imageUrl}>
-              <img src={banner.imageUrl} alt={banner.typeTitle} />
+              <img src="/imgs/banner/star.jpeg" alt={banner.typeTitle} />
             </div>
           ))}
         </Carousel>

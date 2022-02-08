@@ -112,7 +112,7 @@ const PlayerAudio = forwardRef<IAudioRef, PlayerAudioProps>(
 
     //监听播放结束
     const handleEnded = () => {
-      if (sequence === 0) {
+      if (sequence === 0 || playList.length === 1) {
         //单曲循环
         audioRef.current!.play();
       } else {

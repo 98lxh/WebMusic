@@ -1,3 +1,26 @@
 .loadding {
   width: 100%;
 }
+
+.fade-enter {
+  opacity: 0;
+  transform: translateX(30%);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 800ms;
+}
+
+.fade-exit {
+  opacity: 0;
+  transform: translateX(0);
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transform: translateX(-30%);
+  position: absolute;
+  transition: all 800ms;
+}

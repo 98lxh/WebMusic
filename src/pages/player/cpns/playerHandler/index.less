@@ -16,7 +16,14 @@
     }
   }
 
-  .iconfont{
+  .handle {
+    cursor: pointer;
+
+    &.disabled {
+      pointer-events: none;
+      color: #ccc;
+    }
+
     &.active {
       color: #0170fe !important;
     }

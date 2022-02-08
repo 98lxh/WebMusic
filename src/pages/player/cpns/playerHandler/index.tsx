@@ -15,15 +15,22 @@ import "./index.less";
 
 interface IPlayerHandlerProps {
   isPlay: boolean;
-  isShowLyric:boolean;
-  setIsShowLyric:(value:boolean) => void;
+  isShowLyric: boolean;
+  setIsShowLyric: (value: boolean) => void;
   isShowPlayerMenu: boolean;
   playMusic: () => void;
   setIsShowPlayer: (value: boolean) => void;
 }
 
 const PlayerHandler: React.FC<IPlayerHandlerProps> = memo((props) => {
-  const { isPlay, playMusic, setIsShowPlayer, isShowPlayerMenu,setIsShowLyric,isShowLyric } = props;
+  const {
+    isPlay,
+    playMusic,
+    setIsShowPlayer,
+    isShowPlayerMenu,
+    setIsShowLyric,
+    isShowLyric,
+  } = props;
   const dispatch = useDispatch();
   const { playList, sequence } = useSelector(
     (state: IRootState) => ({
@@ -32,7 +39,8 @@ const PlayerHandler: React.FC<IPlayerHandlerProps> = memo((props) => {
     }),
     shallowEqual
   );
-
+  //列表为空时禁用所有操作
+  const IS_DISABLED = playList.length === 0;
   //切换上一首和下一首歌曲
   const changeMusic = (tag: "previous" | "next") => {
     dispatch(changeCurrentSong(tag));
@@ -48,23 +56,40 @@ const PlayerHandler: React.FC<IPlayerHandlerProps> = memo((props) => {
   };
   return (
     <div className="player-handler-wrapper">
-      <div onClick={() => changeMusic("previous")}>
+      <div
+        className={`handle ${IS_DISABLED && "disabled"}`}
+        onClick={() => changeMusic("previous")}
+      >
         <StepBackwardOutlined />
       </div>
-      <div onClick={playMusic}>
+      <div
+        className={`handle ${IS_DISABLED && "disabled"}`}
+        onClick={playMusic}
+      >
         <i
-          className={`iconfont ${
-            isPlay ? "icon-24gf-pause2" : "icon-shipinbofangshibofang"
-          }`}
+          className={`iconfont
+           ${isPlay ? "icon-24gf-pause2" : "icon-shipinbofangshibofang"}
+           `}
         />
       </div>
-      <div onClick={() => changeMusic("next")}>
+      <div
+        className={`handle ${IS_DISABLED && "disabled"}`}
+        onClick={() => changeMusic("next")}
+      >
         <StepForwardOutlined />
       </div>
-        <div onClick={()=>setIsShowLyric(!isShowLyric)}>
-            <i className={`iconfont icon-geciweidianji ${isShowLyric && 'active'}`}></i>
-        </div>
-      <div onClick={changeSequence}>
+      <div
+        className={`handle 
+        ${IS_DISABLED && "disabled"} 
+        ${isShowLyric && "active"}`}
+        onClick={() => setIsShowLyric(!isShowLyric)}
+      >
+        <i className={`iconfont icon-geciweidianji`}></i>
+      </div>
+      <div
+        className={`handle ${IS_DISABLED && "disabled"}`}
+        onClick={changeSequence}
+      >
         <Tooltip
           title={
             sequence === 0

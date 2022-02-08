@@ -28,8 +28,9 @@ const PlayerInfo: React.FC<IPlayInfoProps> = memo((props) => {
     setCurrentTime,
   } = props;
 
-  const { currentSong } = useSelector((state: IRootState) => ({
+  const { currentSong, playList } = useSelector((state: IRootState) => ({
     currentSong: state.playerBar.currentSong as IMusicInfo,
+    playList: state.playerBar.playList,
   }));
 
   const picUrl = currentSong?.picUrl || "/imgs/ico/bbbug.ico";
@@ -64,7 +65,14 @@ const PlayerInfo: React.FC<IPlayInfoProps> = memo((props) => {
   return (
     <div className="player-info-wrapper">
       <div className="image">
-        <img src={picUrl} alt="" />
+        <img
+          src={
+            picUrl === "https://bbbug.hamm.cn//new/images/logo.png"
+              ? "/imgs/ico/bbbug.ico"
+              : picUrl
+          }
+          alt=""
+        />
       </div>
       <div className="info">
         <div className="song">
@@ -75,6 +83,7 @@ const PlayerInfo: React.FC<IPlayInfoProps> = memo((props) => {
           <div className="progress-bar">
             <Slider
               onChange={sliderChange}
+              disabled={playList.length === 0}
               tooltipVisible={false}
               onAfterChange={sliderAfterChange}
               value={progress}

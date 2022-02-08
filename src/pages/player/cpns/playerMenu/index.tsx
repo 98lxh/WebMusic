@@ -31,7 +31,10 @@ const playerMenu: React.FC<IPlayMenuProps> = memo((props) => {
     shallowEqual
   );
   useEffect(() => {
-    lyricRef.current!.scrollTop = 25 * currentLyricIndex;
+    const currentLyric: any = lyricRef.current?.children[currentLyricIndex];
+    if (currentLyric && currentLyric.offsetTop) {
+      lyricRef.current!.scrollTop = currentLyric.offsetTop - 230;
+    }
   }, [currentLyricIndex]);
   const dispatch = useDispatch();
   const changeMusic = (musicIndex: number) => {

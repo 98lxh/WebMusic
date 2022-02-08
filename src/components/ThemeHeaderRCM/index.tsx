@@ -30,10 +30,6 @@ const ThemeHeaderRCM: React.FC<IThemeHeaderRCMProsp> = memo((props) => {
         <h3 className="title">{title}</h3>
         <div className="keyword-container">{keywords && renderKeyword()}</div>
       </div>
-      <div className="right">
-        <a href="xxx">更多</a>
-        <ArrowRightOutlined />
-      </div>
     </div>
   );
 });

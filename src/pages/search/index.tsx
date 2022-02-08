@@ -5,10 +5,9 @@ import { useParams } from "react-router";
 import { searchMuisc_BBBUG } from "../../service/module/bbbug/module/search";
 import { formatDate } from "../../utils/format-utils";
 import { ColumnType } from "antd/lib/table";
-
-import "./index.less";
 import { useDispatch } from "react-redux";
 import { getSongDetailAction } from "../player/store/actionCreators";
+import "./index.less";
 
 const Search: React.FC = memo(() => {
   const param = useParams();
@@ -52,19 +51,21 @@ const Search: React.FC = memo(() => {
     {
       title: "歌手",
       key: "singer",
+      width: 200,
       align: "center",
       ellipsis: true,
       dataIndex: "singer",
     },
     {
       title: "时长",
+      width: 100,
       render: (_: any, r: any) => {
         return <p className="search-table-dt">{formatDate(r.length * 1000)}</p>;
       },
     },
     {
       title: "操作",
-      width: 100,
+      width: 80,
       align: "center",
       fixed: "right",
       render: (_: any, r: any) => {
@@ -83,7 +84,7 @@ const Search: React.FC = memo(() => {
     <div className="search-wrapper">
       <Table
         scroll={{ x: 800 }}
-        pagination={{ position: ["topRight", "bottomCenter"] }}
+        pagination={{ position: ["bottomCenter"] }}
         columns={column}
         dataSource={dataSource}
         loading={loading}
