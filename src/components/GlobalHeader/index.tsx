@@ -1,11 +1,16 @@
 import React, { memo, useCallback, useMemo } from "react";
 import { HeaderMenu, HeaderSearch } from "./cpns";
+import { useSelector } from "react-redux";
+import { IRootState } from "./../../store/reducer";
 import { useLocation } from "react-router-dom";
 import { headerLinks } from "../../common/local-date";
 
 import "./index.less";
 const GlobalHeader: React.FC = memo(() => {
   const { pathname } = useLocation();
+  const { themeDark } = useSelector((state: IRootState) => ({
+    themeDark: state.app.themeDark,
+  }));
 
   const mapPathToSubMenu = useCallback(() => {
     const menu = headerLinks.filter((route) =>
@@ -18,7 +23,7 @@ const GlobalHeader: React.FC = memo(() => {
   const subMenu = useMemo(() => mapPathToSubMenu(), [mapPathToSubMenu]);
 
   return (
-    <div className="muisc-header-wrapper">
+    <div className={`muisc-header-wrapper ${themeDark && "dark"}`}>
       <div className="content">
         <div className="content-menu">
           <div className="content-left">

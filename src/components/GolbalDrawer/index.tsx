@@ -13,7 +13,12 @@ const GolbalDrawer: React.FC<IGolbalDrawerProps & DrawerProps> = memo(
 
     return (
       <div className="golbal-drawer-wraper">
-        <Button className="drawer-trigger" onClick={() => setVisible(true)}>
+        <Button
+          type="primary"
+          shape="circle"
+          className="drawer-trigger"
+          onClick={() => setVisible(true)}
+        >
           {icon}
         </Button>
         <Drawer

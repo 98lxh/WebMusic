@@ -27,10 +27,10 @@ const RankingRecommend: React.FC = memo(() => {
       <ThemeHeaderRCM title="榜单" />
       <Row gutter={24} className="ranking-wrapper">
         <Col sm={24} xs={24} md={8} xl={8} lg={8}>
-          <TopRanking rankingInfo={newRankings!} />
+          <TopRanking rankingInfo={upRankings!} />
         </Col>
         <Col sm={24} xs={24} md={8} xl={8} lg={8}>
-          <TopRanking rankingInfo={upRankings!} />
+          <TopRanking rankingInfo={newRankings!} />
         </Col>
         <Col sm={24} xs={24} md={8} xl={8} lg={8}>
           <TopRanking rankingInfo={originRankings!} />

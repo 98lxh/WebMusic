@@ -1,4 +1,3 @@
-import { DownOutlined, UpOutlined } from "@ant-design/icons";
 import { Col, Row } from "antd";
 import React, { memo, useCallback, useRef, useState } from "react";
 import PlayerMenu from "./cpns/playerMenu";
@@ -7,6 +6,8 @@ import PlayerAudio, { IAudioRef } from "./cpns/playerAudio";
 import PlayerInfo from "./cpns/playerInfo";
 import "./index.less";
 import PlayerLyric from "./cpns/playerLyric";
+import { shallowEqual, useSelector } from "react-redux";
+import { IRootState } from "../../store/reducer";
 
 const PlayerBar: React.FC = memo(() => {
   //显示隐藏播放栏
@@ -27,6 +28,14 @@ const PlayerBar: React.FC = memo(() => {
   const [isShowLyric, setIsShowLyric] = useState(true);
   const [progress, setProgress] = useState(0);
 
+  const { isShowPlayer, themeDark } = useSelector(
+    (state: IRootState) => ({
+      isShowPlayer: state.playerBar.isShowPlayer,
+      themeDark: state.app.themeDark,
+    }),
+    shallowEqual
+  );
+
   //播放 暂停
   const playMusic = useCallback(() => {
     isPlay ? audioRef.current?.pause() : audioRef.current?.play();
@@ -37,58 +46,57 @@ const PlayerBar: React.FC = memo(() => {
     setIsShowPlayerMenu(false);
   };
 
-  const togglePlayer = () => {
-    setShowPlayer(!showPlayer);
-  };
   return (
-    <div className={`player-bar-wrapper ${showPlayer && "show"}`}>
+    <>
       <PlayerMenu
         isShow={isShowPlayerMenu}
         onClose={closePlayerMenu}
         currentLyricIndex={currentLyricIndex}
       />
-      <div className="content">
-        <div className="content-toggle" onClick={togglePlayer}>
-          {showPlayer ? <UpOutlined /> : <DownOutlined />}
+      <div
+        className={`player-bar-wrapper
+       ${isShowPlayer && "show"} ${themeDark && "dark"}`}
+      >
+        <div className="content">
+          <Row gutter={24} justify="center" style={{ width: "100%" }}>
+            <Col sm={24} xs={24} md={16} lg={16} xl={16} className="play-info">
+              <PlayerInfo
+                progress={progress}
+                setProgress={setProgress}
+                isPlay={isPlay}
+                playMusic={playMusic}
+                audio={audioRef.current!}
+                setIsChange={setIsChange}
+                currentTime={currentTime}
+                setCurrentTime={setCurrentTime}
+              />
+            </Col>
+            <Col sm={24} xs={24} md={8} lg={8} xl={8}>
+              <PlayerHandler
+                isPlay={isPlay}
+                isShowLyric={isShowLyric}
+                setIsShowLyric={setIsShowLyric}
+                isShowPlayerMenu={isShowPlayerMenu}
+                setIsShowPlayer={setIsShowPlayerMenu}
+                playMusic={playMusic}
+              />
+            </Col>
+          </Row>
+          <PlayerAudio
+            isChange={isChange}
+            ref={audioRef}
+            setIsPlay={setIsPlay}
+            isPlay={isPlay}
+            setProgress={setProgress}
+            setCurrentTime={setCurrentTime}
+            currentLyricIndex={currentLyricIndex}
+            setCurrentLyricIndex={setCurrentLyricIndex}
+            currentTime={currentTime}
+          />
+          {isShowLyric && <PlayerLyric lyricIndex={currentLyricIndex} />}
         </div>
-        <Row gutter={24} justify="center" style={{ width: "100%" }}>
-          <Col sm={24} xs={24} md={16} lg={16} xl={16} className="play-info">
-            <PlayerInfo
-              progress={progress}
-              setProgress={setProgress}
-              isPlay={isPlay}
-              playMusic={playMusic}
-              audio={audioRef.current!}
-              setIsChange={setIsChange}
-              currentTime={currentTime}
-              setCurrentTime={setCurrentTime}
-            />
-          </Col>
-          <Col sm={24} xs={24} md={8} lg={8} xl={8}>
-            <PlayerHandler
-              isPlay={isPlay}
-              isShowLyric={isShowLyric}
-              setIsShowLyric={setIsShowLyric}
-              isShowPlayerMenu={isShowPlayerMenu}
-              setIsShowPlayer={setIsShowPlayerMenu}
-              playMusic={playMusic}
-            />
-          </Col>
-        </Row>
-        <PlayerAudio
-          isChange={isChange}
-          ref={audioRef}
-          setIsPlay={setIsPlay}
-          isPlay={isPlay}
-          setProgress={setProgress}
-          setCurrentTime={setCurrentTime}
-          currentLyricIndex={currentLyricIndex}
-          setCurrentLyricIndex={setCurrentLyricIndex}
-          currentTime={currentTime}
-        />
-        {isShowLyric && <PlayerLyric lyricIndex={currentLyricIndex} />}
       </div>
-    </div>
+    </>
   );
 });
 

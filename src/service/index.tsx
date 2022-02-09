@@ -1,8 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { IRequestConfig } from "./types";
 import ReactDOM from "react-dom";
-import { Spin } from "antd";
-// import { LoadingOutlined } from "@ant-design/icons";
 import GolbalLoading from "../components/GlobalLoading";
 
 export class Service {

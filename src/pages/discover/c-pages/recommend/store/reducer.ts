@@ -11,6 +11,7 @@ export interface IRecommendState {
   upRankings: TopPlayList | null;
   newRankings: TopPlayList | null;
   originRankings: TopPlayList | null;
+  hotRankings: TopPlayList | null;
 }
 
 interface IRecommendAction {
@@ -20,6 +21,7 @@ interface IRecommendAction {
   upRankings: TopPlayList | null;
   newRankings: TopPlayList | null;
   originRankings: TopPlayList | null;
+  hotRankings: TopPlayList | null;
 }
 
 const defaultState: IRecommendState = {
@@ -28,6 +30,7 @@ const defaultState: IRecommendState = {
   upRankings: null,
   newRankings: null,
   originRankings: null,
+  hotRankings: null,
 };
 
 const reducer: Reducer<IRecommendState, IRecommendAction> = (
@@ -45,6 +48,8 @@ const reducer: Reducer<IRecommendState, IRecommendAction> = (
       return { ...state, newRankings: action.newRankings };
     case RecommedActionType.CHANEG_ORIGIN_RANKING:
       return { ...state, originRankings: action.originRankings };
+    case RecommedActionType.CHANGE_HOT_RANKING:
+      return { ...state, hotRankings: action.hotRankings };
     default:
       return state;
   }

@@ -5,21 +5,39 @@ import {
 } from "../../service/module/netease/module/types";
 import { CaretRightOutlined, PlusOutlined } from "@ant-design/icons";
 import { getSongDetailAction } from "../../pages/player/store/actionCreators";
-import { useDispatch } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import "./index.less";
+import { IRootState } from "../../store/reducer";
 
 interface TopRankingProps {
   rankingInfo: TopPlayList;
 }
 const TopRanking: React.FC<TopRankingProps> = memo(({ rankingInfo }) => {
   const dispatch = useDispatch();
+  const { themeDark } = useSelector(
+    (state: IRootState) => ({
+      themeDark: state.app.themeDark,
+    }),
+    shallowEqual
+  );
+
   const playMusic = (music: TopPlayListTrack) => {
     dispatch(getSongDetailAction(music.id, "netease"));
   };
   return (
-    <div className="top-ranking-wrapper">
+    <div className={`top-ranking-wrapper ${themeDark && "dark"}`}>
       <div className="ranking-header">
-        <img src={rankingInfo?.coverImgUrl} alt="" />
+        <img
+          src={`/imgs/ranking/${
+            rankingInfo?.name === "新歌榜"
+              ? "t1.png"
+              : rankingInfo?.name === "飙升榜"
+              ? "t2.png"
+              : "t3.png"
+          }`}
+          alt=""
+        />
+        <div className="header-mask"></div>
         <h1 className="ranking-title">{rankingInfo?.name}</h1>
       </div>
 

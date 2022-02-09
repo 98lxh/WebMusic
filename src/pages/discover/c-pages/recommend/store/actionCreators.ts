@@ -50,6 +50,11 @@ export const changeOriginRankingAction = (res: ITopRecommend) => ({
   originRankings: res.playlist,
 });
 
+export const changeHotRankingAction = (res: ITopRecommend) => ({
+  type: RecommedActionType.CHANGE_HOT_RANKING,
+  hotRankings: res.playlist,
+});
+
 export const getTopListAction = (idx: number) => (dispatch: Dispatch<any>) => {
   getTopList(idx).then((res) => {
     switch (idx) {
@@ -61,6 +66,9 @@ export const getTopListAction = (idx: number) => (dispatch: Dispatch<any>) => {
         break;
       case 3:
         dispatch(changeUpRankingAction(res));
+        break;
+      case 1:
+        dispatch(changeHotRankingAction(res));
         break;
     }
   });

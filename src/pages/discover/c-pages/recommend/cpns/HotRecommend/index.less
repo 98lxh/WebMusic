@@ -5,8 +5,41 @@
       padding-right: 0.5rem !important;
       padding-top: 0.5rem !important;
       padding-bottom: 0.5rem !important;
-      border-radius: 0.5rem !important;
+      border-radius: 2rem !important;
       overflow: hidden;
+      position: relative;
+
+      &:hover {
+        .hot-handle {
+          opacity: 1;
+
+          svg {
+            opacity: 1;
+          }
+        }
+      }
+
+      .hot-handle {
+        position: absolute;
+        width: calc(100% - 1rem);
+        height: calc(100% - 1rem);
+        font-size: 3rem;
+        background-color: rgba(0, 0, 0, 0.8);
+        opacity: 0.6;
+        z-index: 100;
+        transition: all 0.5s ease-in-out;
+        font-size: 3rem;
+
+        svg {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          color: #fff;
+          opacity: 0;
+          transform: translate(-50%, -50%);
+          cursor: pointer;
+        }
+      }
 
       .ant-card-body {
         padding: 0 !important;
@@ -21,6 +54,7 @@
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
+          text-align: center;
           color: #fff;
           width: 100%;
           bottom: 0px;

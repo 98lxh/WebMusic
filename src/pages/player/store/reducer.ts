@@ -16,6 +16,7 @@ export interface IPlayerBarState {
   playList: IMusicInfo[];
   sequence: number;
   currentLyric: ILyric[];
+  isShowPlayer: boolean;
 }
 
 const defaultState = {
@@ -24,6 +25,7 @@ const defaultState = {
   currentSong: {},
   sequence: 0, //0 单曲 1随机 //2顺序
   currentLyric: [],
+  isShowPlayer: true,
 };
 
 export const reducer: Reducer<IPlayerBarState> = (
@@ -41,6 +43,8 @@ export const reducer: Reducer<IPlayerBarState> = (
       return { ...state, sequence: action.sequence };
     case actionTypes.CHANGE_CURRENT_LYRIC:
       return { ...state, currentLyric: action.currentLyric };
+    case actionTypes.CHANGE_SHOW_PLAYER:
+      return { ...state, isShowPlayer: action.isShowPlayer };
     default:
       return state;
   }

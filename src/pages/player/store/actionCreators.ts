@@ -146,3 +146,9 @@ export const getLyricAction = (id: number, origin: string) => {
     }
   };
 };
+
+//显示隐藏播放条
+export const changeShowPlayerAction = (isShowPlayer: boolean) => ({
+  isShowPlayer,
+  type: actionTypes.CHANGE_SHOW_PLAYER,
+});

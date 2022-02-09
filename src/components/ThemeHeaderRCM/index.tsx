@@ -2,6 +2,8 @@ import React, { memo } from "react";
 import { ArrowRightOutlined, RightCircleOutlined } from "@ant-design/icons";
 
 import "./index.less";
+import { shallowEqual, useSelector } from "react-redux";
+import { IRootState } from "../../store/reducer";
 
 type RCMKeywordType = {
   name: string;
@@ -15,6 +17,12 @@ interface IThemeHeaderRCMProsp {
 
 const ThemeHeaderRCM: React.FC<IThemeHeaderRCMProsp> = memo((props) => {
   const { title, keywords } = props;
+  const { themeDark } = useSelector(
+    (state: IRootState) => ({
+      themeDark: state.app.themeDark,
+    }),
+    shallowEqual
+  );
 
   const renderKeyword = () =>
     keywords!.map((keyword, index) => (
@@ -24,7 +32,7 @@ const ThemeHeaderRCM: React.FC<IThemeHeaderRCMProsp> = memo((props) => {
       </div>
     ));
   return (
-    <div className="rcm-header-wrapper">
+    <div className={`rcm-header-wrapper ${themeDark && "dark"}`}>
       <div className="left">
         <RightCircleOutlined className="icon" />
         <h3 className="title">{title}</h3>

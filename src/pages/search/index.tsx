@@ -5,9 +5,10 @@ import { useParams } from "react-router";
 import { searchMuisc_BBBUG } from "../../service/module/bbbug/module/search";
 import { formatDate } from "../../utils/format-utils";
 import { ColumnType } from "antd/lib/table";
-import { useDispatch } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { getSongDetailAction } from "../player/store/actionCreators";
 import "./index.less";
+import { IRootState } from "../../store/reducer";
 
 const Search: React.FC = memo(() => {
   const param = useParams();
@@ -21,6 +22,13 @@ const Search: React.FC = memo(() => {
       setLoading(false);
     });
   }, [param, setLoading]);
+
+  const { themeDark } = useSelector(
+    (state: IRootState) => ({
+      themeDark: state.app.themeDark,
+    }),
+    shallowEqual
+  );
 
   const column: ColumnType<any>[] = [
     {
@@ -81,7 +89,7 @@ const Search: React.FC = memo(() => {
     },
   ];
   return (
-    <div className="search-wrapper">
+    <div className={`search-wrapper ${themeDark && "dark"}`}>
       <Table
         scroll={{ x: 800 }}
         pagination={{ position: ["bottomCenter"] }}

@@ -2,27 +2,49 @@
   position: fixed;
   z-index: 10000;
   left: 0%;
-  top: -33.5rem;
   height: 33.5rem;
   width: 95vw;
   padding: 0rem 1rem;
   box-sizing: border-box;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
   left: 50%;
-  background-color: #fff;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
+  top: 40%;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.3);
+  border-radius: 1rem;
   transition: all 300ms cubic-bezier(0, 0, 0.2, 1);
+  backdrop-filter: blur(15px);
+
+  &.dark {
+    background-color: #1a1d29cc;
+    color: #fff !important;
+
+    .music-menu-item {
+      &.current-play {
+        background-color: #1a1d29cc !important;
+
+        &:before {
+          display: block;
+          content: "";
+          position: absolute;
+          left: 0.3rem;
+          border-bottom: 0.4rem solid transparent;
+          border-top: 0.4rem solid transparent;
+          border-left: 0.4rem solid #0170fe;
+          border-right: 0.4rem solid transparent;
+        }
+      }
+    }
+  }
 
   &.show {
     opacity: 1;
-    transform: scaleY(1) translateX(-50%);
+    transform: scaleY(1) translate(-50%, -50%);
     transform-origin: bottom;
   }
 
   &.hide {
     opacity: 0;
-    transform: scaleY(0) translateX(-50%);
+    transform: scaleY(0) translate(-50%, -50%);
   }
 
   .music-info {

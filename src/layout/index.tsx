@@ -6,24 +6,35 @@ import GlobalHeader from "../components/GlobalHeader";
 import GlobalFooter from "../components/GlobalFooter";
 import PlayerBar from "../pages/player";
 import "./index.less";
-import GolbalDrawer from "../components/GolbalDrawer";
-import { SettingFilled } from "@ant-design/icons";
+import Setting from "../components/Setting";
+import { shallowEqual, useSelector } from "react-redux";
+import { IRootState } from "../store/reducer";
 const Layout: React.FC = memo(() => {
   const location = useLocation();
+  const { themeDark } = useSelector(
+    (state: IRootState) => ({
+      themeDark: state.app.themeDark,
+    }),
+    shallowEqual
+  );
   return (
     <div className="layout-wrapper">
       <GlobalHeader />
       <TransitionGroup className="fade">
         <CSSTransition key={location.pathname} classNames="fade" timeout={800}>
-          <Row gutter={24} justify={"center"} className="main-wrapper">
-            <Col sm={24} xs={24} md={24} lg={20} xl={18}>
+          <Row
+            gutter={24}
+            justify={"center"}
+            className={`main-wrapper ${themeDark && "dark"}`}
+          >
+            <Col sm={24} xs={24} md={24} lg={22} xl={20}>
               <Outlet />
             </Col>
           </Row>
         </CSSTransition>
       </TransitionGroup>
+      <Setting />
       <PlayerBar />
-      <GolbalDrawer title="设置" icon={<SettingFilled />}></GolbalDrawer>
       <GlobalFooter />
     </div>
   );

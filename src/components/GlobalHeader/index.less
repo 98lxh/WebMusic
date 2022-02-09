@@ -2,11 +2,15 @@
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
   display: flex;
   justify-content: center;
-  margin-bottom: 2px;
+  transition: all 0.5s ease-in-out;
+
+  &.dark {
+    background-color: #1a1d29;
+  }
 
   .content {
     height: 100%;
-    width: 90%;
+    width: 100%;
 
     .content-menu {
       display: flex;

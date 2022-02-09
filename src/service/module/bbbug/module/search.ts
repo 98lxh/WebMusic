@@ -1,6 +1,5 @@
 import service from "../service";
 import { origin } from "../config";
-import qs from "qs";
 export const searchMuisc_BBBUG = (keyword: string) => {
   return service.request(
     {
