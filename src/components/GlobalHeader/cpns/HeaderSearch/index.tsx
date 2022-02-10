@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { Input } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router";
 import "./index.less";
+import { useSelector } from "react-redux";
+import { IRootState } from "../../../../store/reducer";
 
 const HeaderSearch: React.FC = () => {
   const navigate = useNavigate();
+  const { isDark } = useSelector((state: IRootState) => ({
+    isDark: state.app.themeDark,
+  }));
   const [keyword, setKeyword] = useState("");
   const handleSearch = () => {
     if (!keyword.trim()) {
@@ -16,7 +20,7 @@ const HeaderSearch: React.FC = () => {
     setKeyword("");
   };
   return (
-    <div className="header-search-wrapper">
+    <div className={`header-search-wrapper ${isDark && "dark"}`}>
       <Input.Search
         className="header-search"
         placeholder="音乐/视频/电台/用户"
@@ -25,7 +29,6 @@ const HeaderSearch: React.FC = () => {
         onChange={(e) => {
           setKeyword(e.target.value);
         }}
-        prefix={<SearchOutlined />}
       />
     </div>
   );

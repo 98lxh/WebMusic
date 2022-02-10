@@ -1,5 +1,27 @@
 .header-search-wrapper {
   margin-right: 0.5rem;
 
-  background-color: #000;
+  &.dark {
+    .ant-input-group-addon {
+      background-color: #344258 !important;
+      color: #fff;
+
+      .ant-input {
+        border: 0 !important;
+        outline: none;
+      }
+      button {
+        background-color: #344258 !important;
+        border: 1px solid #344258;
+        svg {
+          color: #fff;
+        }
+      }
+    }
+
+    input {
+      border: 1px solid #344258;
+      background-color: #344258 !important;
+    }
+  }
 }

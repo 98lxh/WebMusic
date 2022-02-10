@@ -55,21 +55,22 @@ export const changeHotRankingAction = (res: ITopRecommend) => ({
   hotRankings: res.playlist,
 });
 
-export const getTopListAction = (idx: number) => (dispatch: Dispatch<any>) => {
-  getTopList(idx).then((res) => {
-    switch (idx) {
-      case 0:
-        dispatch(changeNewRankingAction(res));
-        break;
-      case 2:
-        dispatch(changeOriginRankingAction(res));
-        break;
-      case 3:
-        dispatch(changeUpRankingAction(res));
-        break;
-      case 1:
-        dispatch(changeHotRankingAction(res));
-        break;
-    }
-  });
-};
+export const getTopListAction =
+  (idx: number, loadElm: Element) => (dispatch: Dispatch<any>) => {
+    getTopList(idx, loadElm).then((res) => {
+      switch (idx) {
+        case 0:
+          dispatch(changeNewRankingAction(res));
+          break;
+        case 2:
+          dispatch(changeOriginRankingAction(res));
+          break;
+        case 3:
+          dispatch(changeUpRankingAction(res));
+          break;
+        case 1:
+          dispatch(changeHotRankingAction(res));
+          break;
+      }
+    });
+  };

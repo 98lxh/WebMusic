@@ -1,14 +1,15 @@
-import { CaretRightOutlined, PlusOutlined } from "@ant-design/icons";
-import { Table } from "antd";
 import React, { memo, useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { searchMuisc_BBBUG } from "../../service/module/bbbug/module/search";
-import { formatDate } from "../../utils/format-utils";
-import { ColumnType } from "antd/lib/table";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { getSongDetailAction } from "../player/store/actionCreators";
-import "./index.less";
+import { useParams } from "react-router";
+import { searchMuisc_BBBUG } from "../../service/module/bbbug/module/search";
+import { CaretRightOutlined, PlusOutlined } from "@ant-design/icons";
+import { Table } from "antd";
+import { ColumnType } from "antd/lib/table";
+
+import { formatDate } from "../../utils/format-utils";
 import { IRootState } from "../../store/reducer";
+import "./index.less";
 
 const Search: React.FC = memo(() => {
   const param = useParams();
@@ -96,7 +97,7 @@ const Search: React.FC = memo(() => {
         columns={column}
         dataSource={dataSource}
         loading={loading}
-      ></Table>
+      />
     </div>
   );
 });

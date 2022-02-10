@@ -1,18 +1,19 @@
 import App from "../App";
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { useRoutes, Navigate } from "react-router-dom";
-import Discover from "../pages/discover";
 import Album from "../pages/discover/c-pages/album";
 import Artist from "../pages/discover/c-pages/artist";
 import Djradio from "../pages/discover/c-pages/djradio";
 import Ranking from "../pages/discover/c-pages/ranking";
-// import Recommend from "../pages/discover/c-pages/recommend";
+import Recommend from "../pages/discover/c-pages/recommend";
 import Songs from "../pages/discover/c-pages/songs";
-import Friend from "../pages/friend";
-import Profile from "../pages/profile";
 import Search from "../pages/search";
+import GolbalLoading from "../components/GlobalLoading";
 
-const Recommend = lazy(() => import("../pages/discover/c-pages/recommend"));
+const Discover = lazy(() => import("../pages/discover"));
+const Friend = lazy(() => import("../pages/friend"));
+const Profile = lazy(() => import("../pages/profile"));
+
 const Router = () => {
   return useRoutes([
     {
@@ -25,7 +26,11 @@ const Router = () => {
         },
         {
           path: "discover",
-          element: <Discover />,
+          element: (
+            <Suspense fallback={<GolbalLoading />}>
+              <Discover />
+            </Suspense>
+          ),
           children: [
             {
               path: "/discover",
@@ -59,11 +64,19 @@ const Router = () => {
         },
         {
           path: "profile",
-          element: <Profile />,
+          element: (
+            <Suspense fallback={<GolbalLoading />}>
+              <Profile />
+            </Suspense>
+          ),
         },
         {
           path: "friends",
-          element: <Friend />,
+          element: (
+            <Suspense fallback={<GolbalLoading />}>
+              <Friend />
+            </Suspense>
+          ),
         },
         {
           path: "search/:keyword",
