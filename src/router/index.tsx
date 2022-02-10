@@ -1,19 +1,16 @@
 import App from "../App";
-import { lazy, Suspense } from "react";
+import { lazy } from "react";
 import { useRoutes, Navigate } from "react-router-dom";
-import Album from "../pages/discover/c-pages/album";
-import Artist from "../pages/discover/c-pages/artist";
-import Djradio from "../pages/discover/c-pages/djradio";
-import Ranking from "../pages/discover/c-pages/ranking";
-import Recommend from "../pages/discover/c-pages/recommend";
-import Songs from "../pages/discover/c-pages/songs";
-import Search from "../pages/search";
-import GolbalLoading from "../components/GlobalLoading";
-
 const Discover = lazy(() => import("../pages/discover"));
 const Friend = lazy(() => import("../pages/friend"));
 const Profile = lazy(() => import("../pages/profile"));
-
+const Search = lazy(() => import("../pages/search"));
+const Songs = lazy(() => import("../pages/discover/c-pages/songs"));
+const Recommend = lazy(() => import("../pages/discover/c-pages/recommend"));
+const Ranking = lazy(() => import("../pages/discover/c-pages/ranking"));
+const Djradio = lazy(() => import("../pages/discover/c-pages/djradio"));
+const Artist = lazy(() => import("../pages/discover/c-pages/artist"));
+const Album = lazy(() => import("../pages/discover/c-pages/album"));
 const Router = () => {
   return useRoutes([
     {
@@ -26,11 +23,7 @@ const Router = () => {
         },
         {
           path: "discover",
-          element: (
-            <Suspense fallback={<GolbalLoading />}>
-              <Discover />
-            </Suspense>
-          ),
+          element: <Discover />,
           children: [
             {
               path: "/discover",
@@ -64,19 +57,11 @@ const Router = () => {
         },
         {
           path: "profile",
-          element: (
-            <Suspense fallback={<GolbalLoading />}>
-              <Profile />
-            </Suspense>
-          ),
+          element: <Profile />,
         },
         {
           path: "friends",
-          element: (
-            <Suspense fallback={<GolbalLoading />}>
-              <Friend />
-            </Suspense>
-          ),
+          element: <Friend />,
         },
         {
           path: "search/:keyword",

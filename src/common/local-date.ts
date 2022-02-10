@@ -11,6 +11,14 @@ const discoverMenu = [
     title: "歌单",
     link: "/discover/songs",
   },
+  {
+    title: "主播电台",
+    link: "/discover/djradio",
+  },
+  {
+    title: "歌手",
+    link: "/discover/artist",
+  },
 ];
 export const headerLinks = [
   {

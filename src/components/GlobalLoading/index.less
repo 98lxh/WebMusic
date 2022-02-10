@@ -5,6 +5,23 @@
   flex-wrap: wrap;
   justify-content: center;
   position: relative;
+
+  &.golbal {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    background-color: #1a1d29;
+    z-index: 10000;
+
+    .loading {
+      position: absolute !important;
+      left: 50% !important;
+      top: 50% !important;
+      transform: translate(-50%, -50%);
+    }
+  }
+
   .loading {
     display: block;
     position: relative;
