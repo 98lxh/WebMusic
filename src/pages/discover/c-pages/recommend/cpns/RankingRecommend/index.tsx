@@ -23,7 +23,7 @@ const RankingRecommend: React.FC = memo(() => {
     dispatch(getTopListAction(3));
   }, [dispatch]);
   return (
-    <div className="newalbum-wrapper">
+    <div className="newalbum-wrapper" style={{ padding: ".3rem .5rem" }}>
       <ThemeHeaderRCM title="榜单" />
       <Row gutter={24} className="ranking-wrapper">
         <Col sm={24} xs={24} md={8} xl={8} lg={8}>

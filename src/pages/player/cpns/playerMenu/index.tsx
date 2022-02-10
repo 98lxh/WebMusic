@@ -95,7 +95,8 @@ const playerMenu: React.FC<IPlayMenuProps> = memo((props) => {
                   src={`/imgs/ico/${
                     music.origin === "netease" ? "netease.png" : "bbbug.ico"
                   }`}
-                ></img>
+                  alt=""
+                />
               </li>
             ))}
           </ul>

@@ -1,0 +1,17 @@
+.setting-wrapper {
+  position: fixed;
+  bottom: 10rem;
+  right: 2rem;
+  z-index: 100;
+  overflow: hidden;
+
+  .setting-all {
+    position: relative;
+    right: -4rem;
+    transition: all 0.6s ease-in-out;
+
+    &.show {
+      right: 0;
+    }
+  }
+}

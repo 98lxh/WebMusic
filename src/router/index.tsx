@@ -1,15 +1,18 @@
-import { useRoutes, Navigate } from "react-router-dom";
 import App from "../App";
+import { lazy } from "react";
+import { useRoutes, Navigate } from "react-router-dom";
 import Discover from "../pages/discover";
 import Album from "../pages/discover/c-pages/album";
 import Artist from "../pages/discover/c-pages/artist";
 import Djradio from "../pages/discover/c-pages/djradio";
 import Ranking from "../pages/discover/c-pages/ranking";
-import Recommend from "../pages/discover/c-pages/recommend";
+// import Recommend from "../pages/discover/c-pages/recommend";
 import Songs from "../pages/discover/c-pages/songs";
 import Friend from "../pages/friend";
 import Profile from "../pages/profile";
 import Search from "../pages/search";
+
+const Recommend = lazy(() => import("../pages/discover/c-pages/recommend"));
 const Router = () => {
   return useRoutes([
     {

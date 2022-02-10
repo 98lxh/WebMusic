@@ -4,14 +4,12 @@ import PlayerMenu from "./cpns/playerMenu";
 import PlayerHandler from "./cpns/playerHandler";
 import PlayerAudio, { IAudioRef } from "./cpns/playerAudio";
 import PlayerInfo from "./cpns/playerInfo";
-import "./index.less";
 import PlayerLyric from "./cpns/playerLyric";
 import { shallowEqual, useSelector } from "react-redux";
 import { IRootState } from "../../store/reducer";
+import "./index.less";
 
 const PlayerBar: React.FC = memo(() => {
-  //显示隐藏播放栏
-  const [showPlayer, setShowPlayer] = useState(true);
   //是否在播放中
   const [isPlay, setIsPlay] = useState(false);
   //进度条
