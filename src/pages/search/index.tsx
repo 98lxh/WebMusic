@@ -37,7 +37,7 @@ const Search: React.FC = memo(() => {
       title: "封面",
       width: 100,
       align: "center",
-      key: "fm",
+      key: "pic",
       render: (_: any, r: any) => {
         return (
           <img
@@ -72,6 +72,7 @@ const Search: React.FC = memo(() => {
       title: "操作",
       width: 80,
       align: "center",
+      key: "index",
       fixed: "right",
       render: (_: any, r: any) => {
         return (
