@@ -4,7 +4,7 @@ import {
   RecommendBannersType,
   TopPlayList,
 } from "../../../../../service/module/netease/module/types";
-import { RecommedActionType } from "./constants";
+import { actionTypes } from "./constants";
 export interface IRecommendState {
   topBanners: RecommendBannersType[];
   hotRecommends: HotRecommend[];
@@ -15,7 +15,7 @@ export interface IRecommendState {
 }
 
 interface IRecommendAction {
-  type: RecommedActionType;
+  type: actionTypes;
   topBanners: RecommendBannersType[];
   hotRecommends: HotRecommend[];
   upRankings: TopPlayList | null;
@@ -38,17 +38,17 @@ const reducer: Reducer<IRecommendState, IRecommendAction> = (
   action
 ) => {
   switch (action.type) {
-    case RecommedActionType.CHANGE_BANNER_TOP:
+    case actionTypes.CHANGE_BANNER_TOP:
       return { ...state, topBanners: action.topBanners! };
-    case RecommedActionType.CHANGE_HOT_ROCOMMEND:
+    case actionTypes.CHANGE_HOT_ROCOMMEND:
       return { ...state, hotRecommends: action.hotRecommends! };
-    case RecommedActionType.CHANEG_UP_RANKING:
+    case actionTypes.CHANEG_UP_RANKING:
       return { ...state, upRankings: action.upRankings };
-    case RecommedActionType.CHANEG_NEW_RANKING:
+    case actionTypes.CHANEG_NEW_RANKING:
       return { ...state, newRankings: action.newRankings };
-    case RecommedActionType.CHANEG_ORIGIN_RANKING:
+    case actionTypes.CHANEG_ORIGIN_RANKING:
       return { ...state, originRankings: action.originRankings };
-    case RecommedActionType.CHANGE_HOT_RANKING:
+    case actionTypes.CHANGE_HOT_RANKING:
       return { ...state, hotRankings: action.hotRankings };
     default:
       return state;

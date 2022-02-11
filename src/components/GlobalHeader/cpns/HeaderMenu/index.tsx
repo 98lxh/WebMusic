@@ -1,8 +1,6 @@
 import React, { memo } from "react";
 import { Menu } from "antd";
 import { NavLink, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { IRootState } from "../../../../store/reducer";
 import "./index.less";
 
 type HeaderMenuType = {
@@ -18,20 +16,17 @@ interface IHeaderMenuProps {
 const HeaderMenu: React.FC<IHeaderMenuProps> = memo((props) => {
   const { menuList, height } = props;
   const location = useLocation();
-  const { themeDark } = useSelector((state: IRootState) => ({
-    themeDark: state.app.themeDark,
-  }));
 
-  const menuStyle = () => ({
+  const navMenuStyle = {
     height: height ? height : "4rem",
     lineHeight: height ? height : "4rem",
-  });
+  };
 
   return (
     <Menu
       mode="horizontal"
-      style={menuStyle()}
-      className={`header-menu-wapper ${themeDark && "dark"}`}
+      style={navMenuStyle}
+      className="header-menu-wapper"
       activeKey={location.pathname}
     >
       {menuList.map((route) => (

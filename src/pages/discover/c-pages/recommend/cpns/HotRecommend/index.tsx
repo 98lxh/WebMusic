@@ -6,9 +6,14 @@ import { IRootState } from "../../../../../../store/reducer";
 import { Card, Col, Row } from "antd";
 import { CaretRightOutlined } from "@ant-design/icons";
 import "./index.less";
+import { TopPlayListTrack } from "../../../../../../service/module/netease/module/types";
+import { getSongDetailAction } from "../../../../../player/store/actionCreators";
 const HotRecommed: React.FC = memo(() => {
   const dispatch = useDispatch();
   const loadRef = useRef<HTMLDivElement>(null);
+  const playMusic = (music: TopPlayListTrack) => {
+    dispatch(getSongDetailAction(music.id, "netease"));
+  };
   const { hotRankings } = useSelector(
     (state: IRootState) => ({
       hotRankings: state.recommend.hotRankings,
@@ -38,7 +43,7 @@ const HotRecommed: React.FC = memo(() => {
             key={index}
           >
             <div className="hot-handle">
-              <CaretRightOutlined />
+              <CaretRightOutlined onClick={() => playMusic(hot)} />
             </div>
             <Card
               bordered

@@ -4,7 +4,6 @@ import ThemeHeaderRCM from "../../../../../../components/ThemeHeaderRCM";
 import { getTopListAction } from "../../store/actionCreators";
 import { IRootState } from "../../../../../../store/reducer";
 import { Col, Row } from "antd";
-import "./index.less";
 import TopRanking from "../../../../../../components/TopRanking";
 
 const RankingRecommend: React.FC = memo(() => {
@@ -26,9 +25,9 @@ const RankingRecommend: React.FC = memo(() => {
       dispatch(getTopListAction(2, newLoadRef.current!));
       dispatch(getTopListAction(3, originLoadRef.current!));
     }
-  }, [dispatch]);
+  }, [dispatch, newRankings]);
   return (
-    <div className="newalbum-wrapper" style={{ padding: ".3rem .5rem" }}>
+    <div className="newalbum-wrapper">
       <ThemeHeaderRCM title="榜单" />
       <Row gutter={24} className="ranking-wrapper">
         <Col sm={24} xs={24} md={8} xl={8} lg={8}>

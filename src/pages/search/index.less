@@ -1,7 +1,14 @@
 .search-wrapper {
   padding: 1rem;
 
-  &.dark {
+  .search-table-handle {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.dark {
+  .search-wrapper {
     .ant-table-content {
       background-color: #344258 !important;
       color: #fff;
@@ -14,10 +21,9 @@
         color: #fff;
       }
     }
-  }
 
-  .search-table-handle {
-    display: flex;
-    justify-content: space-between;
+    a {
+      color: #000 !important;
+    }
   }
 }

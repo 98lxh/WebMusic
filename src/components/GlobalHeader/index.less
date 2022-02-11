@@ -4,11 +4,6 @@
   justify-content: center;
   transition: all 0.5s ease-in-out;
 
-  &.dark {
-    background-color: #1a1d29;
-    box-shadow: 0 2px 4px 0 rgba(255, 255, 255, 0.05);
-  }
-
   .content {
     height: 100%;
     width: 100%;
@@ -19,6 +14,7 @@
       align-items: center;
       overflow: hidden;
       flex-wrap: wrap;
+      position: relative;
 
       .ant-menu {
         border-width: 0;
@@ -26,12 +22,13 @@
 
       .content-left {
         line-height: 4rem;
-        width: 55%;
+        width: 100%;
       }
 
       .content-right {
-        width: 45%;
-        height: 2rem;
+        position: absolute;
+        width: 30%;
+        right: 1rem;
       }
     }
 

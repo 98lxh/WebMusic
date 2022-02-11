@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useState } from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getSongDetailAction } from "../player/store/actionCreators";
 import { useParams } from "react-router";
 import { searchMuisc_BBBUG } from "../../service/module/bbbug/module/search";
@@ -8,7 +8,6 @@ import { Table } from "antd";
 import { ColumnType } from "antd/lib/table";
 
 import { formatDate } from "../../utils/format-utils";
-import { IRootState } from "../../store/reducer";
 import "./index.less";
 
 const Search: React.FC = memo(() => {
@@ -16,6 +15,7 @@ const Search: React.FC = memo(() => {
   const [dataSource, setDataSource] = useState([]);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+
   useEffect(() => {
     setLoading(true);
     searchMuisc_BBBUG(param.keyword!).then((res) => {
@@ -23,13 +23,6 @@ const Search: React.FC = memo(() => {
       setLoading(false);
     });
   }, [param, setLoading]);
-
-  const { themeDark } = useSelector(
-    (state: IRootState) => ({
-      themeDark: state.app.themeDark,
-    }),
-    shallowEqual
-  );
 
   const column: ColumnType<any>[] = [
     {
@@ -44,6 +37,7 @@ const Search: React.FC = memo(() => {
       title: "封面",
       width: 100,
       align: "center",
+      key: "fm",
       render: (_: any, r: any) => {
         return (
           <img
@@ -53,7 +47,8 @@ const Search: React.FC = memo(() => {
                 ? "/imgs/ico/bbbug.ico"
                 : r.pic
             }
-          ></img>
+            alt=""
+          />
         );
       },
     },
@@ -67,6 +62,7 @@ const Search: React.FC = memo(() => {
     },
     {
       title: "时长",
+      key: "length",
       width: 100,
       render: (_: any, r: any) => {
         return <p className="search-table-dt">{formatDate(r.length * 1000)}</p>;
@@ -90,7 +86,7 @@ const Search: React.FC = memo(() => {
     },
   ];
   return (
-    <div className={`search-wrapper ${themeDark && "dark"}`}>
+    <div className="search-wrapper">
       <Table
         scroll={{ x: 800 }}
         pagination={{ position: ["bottomCenter"] }}

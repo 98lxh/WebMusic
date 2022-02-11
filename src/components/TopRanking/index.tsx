@@ -5,27 +5,20 @@ import {
 } from "../../service/module/netease/module/types";
 import { CaretRightOutlined, PlusOutlined } from "@ant-design/icons";
 import { getSongDetailAction } from "../../pages/player/store/actionCreators";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import "./index.less";
-import { IRootState } from "../../store/reducer";
 
 interface TopRankingProps {
   rankingInfo: TopPlayList;
 }
 const TopRanking: React.FC<TopRankingProps> = memo(({ rankingInfo }) => {
   const dispatch = useDispatch();
-  const { themeDark } = useSelector(
-    (state: IRootState) => ({
-      themeDark: state.app.themeDark,
-    }),
-    shallowEqual
-  );
 
   const playMusic = (music: TopPlayListTrack) => {
     dispatch(getSongDetailAction(music.id, "netease"));
   };
   return (
-    <div className={`top-ranking-wrapper ${themeDark && "dark"}`}>
+    <div className="top-ranking-wrapper">
       <div className="ranking-header">
         <img
           src={`/imgs/ranking/${

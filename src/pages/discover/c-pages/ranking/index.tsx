@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import GolbalEmtry from "../../../../components/GlobalEmtry";
 const Ranking: React.FC = () => {
   return (

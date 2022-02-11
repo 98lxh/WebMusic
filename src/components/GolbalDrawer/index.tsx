@@ -6,6 +6,7 @@ import "./index.less";
 interface IGolbalDrawerProps {
   icon?: React.ReactElement;
 }
+
 const GolbalDrawer: React.FC<IGolbalDrawerProps & DrawerProps> = memo(
   (props) => {
     const { children, icon, ...drawerProps } = props;

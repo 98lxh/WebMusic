@@ -1,4 +1,4 @@
-import { RecommedActionType } from "./constants";
+import { actionTypes } from "./constants";
 import {
   getTopBanners,
   getHotRecommends,
@@ -11,22 +11,12 @@ import {
 } from "./../../../../../service/module/netease/module/types";
 import { Dispatch } from "react";
 
-const changeTopBannerAction = (res: IRecommendBannners) => ({
-  type: RecommedActionType.CHANGE_BANNER_TOP,
-  topBanners: res.banners,
-});
-
 export const getTopBannerAction =
   (loadElm: Element) => (dispatch: Dispatch<any>) => {
     getTopBanners(loadElm).then((res) => {
       dispatch(changeTopBannerAction(res));
     });
   };
-
-const changeHotRecommendsAction = (res: IHotRecommend) => ({
-  type: RecommedActionType.CHANGE_HOT_ROCOMMEND,
-  hotRecommends: res.result,
-});
 
 export const getHotRecommendAction =
   (loadElm: Element) => (dispatch: Dispatch<any>) => {
@@ -35,26 +25,6 @@ export const getHotRecommendAction =
     });
   };
 
-export const changeUpRankingAction = (res: ITopRecommend) => ({
-  type: RecommedActionType.CHANEG_UP_RANKING,
-  upRankings: res.playlist,
-});
-
-export const changeNewRankingAction = (res: ITopRecommend) => ({
-  type: RecommedActionType.CHANEG_NEW_RANKING,
-  newRankings: res.playlist,
-});
-
-export const changeOriginRankingAction = (res: ITopRecommend) => ({
-  type: RecommedActionType.CHANEG_ORIGIN_RANKING,
-  originRankings: res.playlist,
-});
-
-export const changeHotRankingAction = (res: ITopRecommend) => ({
-  type: RecommedActionType.CHANGE_HOT_RANKING,
-  hotRankings: res.playlist,
-});
-
 export const getTopListAction =
   (idx: number, loadElm: Element) => (dispatch: Dispatch<any>) => {
     getTopList(idx, loadElm).then((res) => {
@@ -62,15 +32,45 @@ export const getTopListAction =
         case 0:
           dispatch(changeNewRankingAction(res));
           break;
+        case 1:
+          dispatch(changeHotRankingAction(res));
+          break;
         case 2:
           dispatch(changeOriginRankingAction(res));
           break;
         case 3:
           dispatch(changeUpRankingAction(res));
           break;
-        case 1:
-          dispatch(changeHotRankingAction(res));
-          break;
       }
     });
   };
+
+export const changeUpRankingAction = (res: ITopRecommend) => ({
+  type: actionTypes.CHANEG_UP_RANKING,
+  upRankings: res.playlist,
+});
+
+export const changeNewRankingAction = (res: ITopRecommend) => ({
+  type: actionTypes.CHANEG_NEW_RANKING,
+  newRankings: res.playlist,
+});
+
+export const changeOriginRankingAction = (res: ITopRecommend) => ({
+  type: actionTypes.CHANEG_ORIGIN_RANKING,
+  originRankings: res.playlist,
+});
+
+export const changeHotRankingAction = (res: ITopRecommend) => ({
+  type: actionTypes.CHANGE_HOT_RANKING,
+  hotRankings: res.playlist,
+});
+
+const changeHotRecommendsAction = (res: IHotRecommend) => ({
+  type: actionTypes.CHANGE_HOT_ROCOMMEND,
+  hotRecommends: res.result,
+});
+
+const changeTopBannerAction = (res: IRecommendBannners) => ({
+  type: actionTypes.CHANGE_BANNER_TOP,
+  topBanners: res.banners,
+});

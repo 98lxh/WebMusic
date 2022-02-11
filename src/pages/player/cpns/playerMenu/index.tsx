@@ -21,12 +21,11 @@ interface IPlayMenuProps {
 const playerMenu: React.FC<IPlayMenuProps> = memo((props) => {
   const { currentLyricIndex } = props;
   const lyricRef = useRef<HTMLDivElement>(null);
-  const { playList, currentSong, currentLyric, themeDark } = useSelector(
+  const { playList, currentSong, currentLyric } = useSelector(
     (state: IRootState) => ({
       playList: state.playerBar.playList,
       currentSong: state.playerBar.currentSong as IMusicInfo,
       currentLyric: state.playerBar.currentLyric,
-      themeDark: state.app.themeDark,
     }),
     shallowEqual
   );
@@ -41,11 +40,7 @@ const playerMenu: React.FC<IPlayMenuProps> = memo((props) => {
     dispatch(changeCurrentSong("next", musicIndex));
   };
   return (
-    <div
-      className={`player-menu-wrapper ${props.isShow ? "show" : "hide"} ${
-        themeDark && "dark"
-      }`}
-    >
+    <div className={`player-menu-wrapper ${props.isShow ? "show" : "hide"}`}>
       <Row gutter={24}>
         <Col sm={0} xs={0} md={10} lg={10} xl={10} className="music-info">
           <div className="music-info-title">{currentSong.name}</div>

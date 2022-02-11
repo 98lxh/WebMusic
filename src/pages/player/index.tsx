@@ -26,10 +26,9 @@ const PlayerBar: React.FC = memo(() => {
   const [isShowLyric, setIsShowLyric] = useState(true);
   const [progress, setProgress] = useState(0);
 
-  const { isShowPlayer, themeDark } = useSelector(
+  const { isShowPlayer } = useSelector(
     (state: IRootState) => ({
       isShowPlayer: state.playerBar.isShowPlayer,
-      themeDark: state.app.themeDark,
     }),
     shallowEqual
   );
@@ -53,7 +52,7 @@ const PlayerBar: React.FC = memo(() => {
       />
       <div
         className={`player-bar-wrapper
-       ${isShowPlayer && "show"} ${themeDark && "dark"}`}
+       ${isShowPlayer && "show"}`}
       >
         <div className="content">
           <Row gutter={24} justify="center" style={{ width: "100%" }}>
