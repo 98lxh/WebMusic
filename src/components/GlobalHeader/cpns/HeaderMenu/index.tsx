@@ -24,9 +24,9 @@ const HeaderMenu: React.FC<IHeaderMenuProps> = memo((props) => {
 
   return (
     <Menu
+      className="header-menu-wapper"
       mode="horizontal"
       style={navMenuStyle}
-      className="header-menu-wapper"
       activeKey={location.pathname}
     >
       {menuList.map((route) => (

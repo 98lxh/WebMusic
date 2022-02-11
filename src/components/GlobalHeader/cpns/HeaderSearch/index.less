@@ -1,20 +1,70 @@
 .header-search-wrapper {
-  margin-right: 0.5rem;
+  position: relative;
+  button {
+    height: 2.5rem;
+    width: 2.5rem;
+    border: 0px solid #fff;
+    background-color: transparent;
+
+    &:hover {
+      background-color: transparent;
+    }
+
+    &:active {
+      background-color: transparent;
+    }
+
+    &:focus {
+      background-color: transparent;
+    }
+  }
+  input {
+    height: 2.5rem;
+    border: none;
+    border-left: 0px solid #fff;
+    background-color: transparent;
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 1px;
+    height: 50%;
+    background-color: #c7c7c7;
+    top: 50%;
+    z-index: 100;
+    transform: translateY(-50%);
+  }
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 1px;
+    height: 50%;
+    background-color: #c7c7c7;
+    top: 50%;
+    right: 3rem;
+    transform: translateY(-50%);
+    z-index: 100;
+  }
 }
 
 .dark {
   .header-search-wrapper {
     .ant-input-group-addon {
-      background-color: #344258 !important;
-      color: #fff;
+      background-color: transparent !important;
 
       .ant-input {
         border: 0 !important;
         outline: none;
       }
       button {
-        background-color: #344258 !important;
-        border: 1px solid #344258;
         svg {
           color: #fff;
         }
@@ -22,9 +72,7 @@
     }
 
     input {
-      border: 1px solid #344258;
       color: #fff;
-      background-color: #344258 !important;
     }
   }
 }

@@ -10,8 +10,8 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../../../../store/reducer";
 import { formatDate } from "../../../../utils/format-utils";
 import { changeCurrentSong } from "../../store/actionCreators";
-import "./index.less";
 import { IMusicInfo } from "../../store/reducer";
+import "./index.less";
 
 interface IPlayMenuProps {
   isShow: boolean;
@@ -20,7 +20,9 @@ interface IPlayMenuProps {
 }
 const playerMenu: React.FC<IPlayMenuProps> = memo((props) => {
   const { currentLyricIndex } = props;
+  const dispatch = useDispatch();
   const lyricRef = useRef<HTMLDivElement>(null);
+
   const { playList, currentSong, currentLyric } = useSelector(
     (state: IRootState) => ({
       playList: state.playerBar.playList,
@@ -29,13 +31,14 @@ const playerMenu: React.FC<IPlayMenuProps> = memo((props) => {
     }),
     shallowEqual
   );
+
   useEffect(() => {
     const currentLyric: any = lyricRef.current?.children[currentLyricIndex];
     if (currentLyric && currentLyric.offsetTop) {
       lyricRef.current!.scrollTop = currentLyric.offsetTop - 230;
     }
   }, [currentLyricIndex]);
-  const dispatch = useDispatch();
+
   const changeMusic = (musicIndex: number) => {
     dispatch(changeCurrentSong("next", musicIndex));
   };

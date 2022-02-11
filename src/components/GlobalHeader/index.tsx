@@ -13,6 +13,7 @@ const GlobalHeader: React.FC = memo(() => {
     if (menu) return menu.children;
     return [];
   }, [pathname]);
+
   const subMenu = useMemo(() => mapPathToSubMenu(), [mapPathToSubMenu]);
 
   return (
@@ -20,7 +21,7 @@ const GlobalHeader: React.FC = memo(() => {
       <div className="content">
         <div className="content-menu">
           <div className="content-left">
-            <HeaderMenu menuList={headerLinks} />
+            <HeaderMenu height="2.5rem" menuList={headerLinks} />
           </div>
           <div className="content-right">
             <HeaderSearch />

@@ -14,15 +14,21 @@ const Search: React.FC = memo(() => {
   const param = useParams();
   const [dataSource, setDataSource] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [flag, setFlag] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setLoading(true);
-    searchMuisc_BBBUG(param.keyword!).then((res) => {
-      setDataSource(res.data);
-      setLoading(false);
-    });
-  }, [param, setLoading]);
+    if (flag) {
+      setLoading(true);
+      searchMuisc_BBBUG(param.keyword!).then((res) => {
+        setDataSource(res.data);
+        setLoading(false);
+      });
+    }
+    return () => {
+      setFlag(false);
+    };
+  }, [param, setLoading, flag]);
 
   const column: ColumnType<any>[] = [
     {

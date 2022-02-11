@@ -19,8 +19,8 @@ const HeaderSearch: React.FC = () => {
   return (
     <div className="header-search-wrapper">
       <Input.Search
-        className="header-search"
-        placeholder="音乐/歌手/专辑"
+        className={`header-search`}
+        placeholder="输入音乐/歌手/专辑.."
         value={keyword}
         onSearch={handleSearch}
         onChange={(e) => {
