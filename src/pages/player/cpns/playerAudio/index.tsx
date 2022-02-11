@@ -88,9 +88,9 @@ const PlayerAudio = forwardRef<IAudioRef, PlayerAudioProps>(
     }, [currentSong, setIsPlay]);
 
     useEffect(() => {
-      playList.length &&
-        dispatch(getSongDetailAction(playList[0].id, playList[0].origin));
-    }, [dispatch, playList[0]]);
+      const list = [...playList];
+      list.length && dispatch(getSongDetailAction(list[0].id, list[0].origin));
+    }, [dispatch, playList]);
 
     const timeUpdate = (event: React.UIEvent<HTMLAudioElement>) => {
       if (isChange) return;
