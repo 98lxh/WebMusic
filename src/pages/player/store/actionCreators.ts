@@ -54,7 +54,7 @@ export const changeCurrentSong = (
       //选择了列表中的歌曲
       const currentSong = playList[musicIndex];
       dispatch(changeCurrentSongAction(currentSong));
-      dispatch(changeCurrentSongIndexAction(currentSongIndex));
+      dispatch(changeCurrentSongIndexAction(musicIndex));
       dispatch(getLyricAction(currentSong.id, currentSong.origin));
       return false;
     }
