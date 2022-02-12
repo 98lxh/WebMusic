@@ -13,7 +13,7 @@ import "./index.less";
 const Layout: React.FC = memo(() => {
   const { themeDark } = useSelector(
     (state: IRootState) => ({
-      themeDark: state.app.themeDark,
+      themeDark: state.system.themeDark,
     }),
     shallowEqual
   );

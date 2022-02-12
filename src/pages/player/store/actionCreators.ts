@@ -31,34 +31,37 @@ export const getSongDetailAction = (
       dispatch(getLyricAction(song.id, origin));
     } else {
       //列表中不存在该歌曲
+      let newPlayList: any;
       //区分来源
       switch (origin) {
         case "netease":
           getSongDetail_netease(ids).then((res) => {
             song = res.songs && formatMusicInfo(res, origin);
             if (!song) return;
-            const newPlayList = [...playerList, song];
-            dispatch(changePlayListAction(newPlayList));
-            dispatch(changeCurrentSongIndexAction(newPlayList.length - 1));
-            dispatch(changeCurrentSongAction(song));
-            //请求歌词
-            dispatch(getLyricAction(song.id, origin));
+            newPlayList = [...playerList, song];
           });
           break;
         default:
           song = formatMusicInfo(bbbugSongInfo, origin);
-          const newPlayList = [...playerList, song];
-          dispatch(changePlayListAction(newPlayList));
-          dispatch(changeCurrentSongIndexAction(newPlayList.length - 1));
-          dispatch(changeCurrentSongAction(song));
-          //请求歌词
-          dispatch(getLyricAction(song!.id, origin));
+          if (!song) return;
+          newPlayList = [...playerList, song];
           break;
       }
+      dispatch(changePlayListAction(newPlayList));
+      dispatch(changeCurrentSongIndexAction(newPlayList.length - 1));
+      dispatch(changeCurrentSongAction(song));
+      //请求歌词
+      dispatch(getLyricAction(song!.id, origin));
     }
   };
 };
 
+/**
+ * 切换当前歌曲
+ * @param {tag} 上一首\下一首
+ * @param {musicIndex} 切换歌曲在播放列表的下标
+ * 
+*/
 export const changeCurrentSong = (
   tag: "previous" | "next",
   musicIndex?: number
@@ -98,34 +101,50 @@ export const changeCurrentSong = (
         break;
     }
     const currentSong = playList[currentSongIndex];
+    console.log(currentSong)
     dispatch(changeCurrentSongAction(currentSong));
     dispatch(changeCurrentSongIndexAction(currentSongIndex));
     dispatch(getLyricAction(currentSong.id, currentSong.origin));
   };
 };
 
+/**
+ * 改变播放列表
+*/
 export const changePlayListAction = (playList: any) => ({
   type: actionTypes.CHANGE_PLAY_LIST,
   playList,
 });
 
+/**
+ * 改变当前歌曲的下标
+*/
 export const changeCurrentSongIndexAction = (currentSongIndex: number) => ({
   type: actionTypes.CHANGE_CURRENT_SONG_INDEX,
   currentSongIndex,
 });
 
+/**
+ * 改变播放的模式 单曲\列表\随机
+*/
 export const changeSequenceAction = (sequence: number) => ({
   type: actionTypes.CHANGE_SEQUENCE,
   sequence,
 });
 
-//保存歌词
+/**
+ * 改变当前歌词
+*/
 export const changeCurrentLyricAction = (currentLyric: ILyric[]) => ({
   type: actionTypes.CHANGE_CURRENT_LYRIC,
   currentLyric,
 });
 
-//获取歌词
+/**
+ * 获取歌词
+ * @param {id} 歌曲的id
+ * @parma {origin} 歌曲的来源
+*/
 export const getLyricAction = (id: number, origin: string) => {
   return (dispatch: Dispatch<any>) => {
     switch (origin) {

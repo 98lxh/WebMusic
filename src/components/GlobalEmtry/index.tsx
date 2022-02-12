@@ -10,7 +10,7 @@ const GolbalEmtry = () => {
         className="emtry"
         image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
         description={<a href="/">该功能正在开发中,点击返回首页</a>}
-      ></Empty>
+      />
     </div>
   );
 };

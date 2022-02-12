@@ -30,7 +30,10 @@ export interface IAudioRef {
 }
 const PlayerAudio = forwardRef<IAudioRef, PlayerAudioProps>(
   (
-    {
+    props,
+    ref
+  ) => {
+    const {
       setIsPlay,
       setProgress,
       isChange,
@@ -38,9 +41,7 @@ const PlayerAudio = forwardRef<IAudioRef, PlayerAudioProps>(
       currentTime,
       currentLyricIndex,
       setCurrentLyricIndex,
-    },
-    ref
-  ) => {
+    } = props
     const audioRef = useRef<HTMLAudioElement>(null);
     const { currentSong, sequence, playList, lyric } = useSelector(
       (state: IRootState) => ({
@@ -90,7 +91,7 @@ const PlayerAudio = forwardRef<IAudioRef, PlayerAudioProps>(
     useEffect(() => {
       const list = [...playList];
       list.length && dispatch(getSongDetailAction(list[0].id, list[0].origin));
-    }, [dispatch, playList]);
+    }, [dispatch]);
 
     const timeUpdate = (event: React.UIEvent<HTMLAudioElement>) => {
       if (isChange) return;

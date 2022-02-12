@@ -8,7 +8,7 @@ const SettingTheme = memo(() => {
   const dispatch = useDispatch();
   const { isDark } = useSelector(
     (state: IRootState) => ({
-      isDark: state.app.themeDark,
+      isDark: state.system.themeDark,
     }),
     shallowEqual
   );

@@ -6,20 +6,20 @@ import { reducer as recommendReducer } from "./../pages/discover/c-pages/recomme
 import { reducer as playerBarReuducer } from "../pages/player/store";
 import actionTypes from "./constant";
 
-interface IAppState {
+interface ISystemState {
   themeDark: boolean;
 }
 export interface IRootState {
   recommend: IRecommendState;
   playerBar: IPlayerBarState;
-  app: IAppState;
+  system: ISystemState;
 }
 
-const defaultState: IAppState = {
+const defaultState: ISystemState = {
   themeDark: true,
 };
 
-const appReducer: Reducer<IAppState, any> = (state = defaultState, action) => {
+const systemReducer: Reducer<ISystemState, any> = (state = defaultState, action) => {
   switch (action.type) {
     case actionTypes.CHANGE_DARK:
       return { ...state, themeDark: action.themeDark };
@@ -31,7 +31,7 @@ const appReducer: Reducer<IAppState, any> = (state = defaultState, action) => {
 const reducer = combineReducers<CombinedState<IRootState>>({
   recommend: recommendReducer,
   playerBar: playerBarReuducer,
-  app: appReducer,
+  system: systemReducer,
 });
 
 export default reducer;
