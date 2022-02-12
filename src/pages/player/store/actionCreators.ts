@@ -1,28 +1,19 @@
 import { Dispatch } from "react";
-import {
-  getLRC_NETEASE,
-  getSongDetail_netease,
-} from "../../../service/module/netease/module/player";
+import { getLRC_NETEASE } from "../../../service/module/netease/module/player";
 import actionTypes from "./constant";
 import { ILyric, parseLyric } from "../../../utils/parse-lyric";
 import { formatMusicInfo } from "../../../utils/format-musicInfo";
 import { getLRC_BBBUG } from "../../../service/module/bbbug/module/player";
 
-const changeCurrentSongAction = (currentSong: any) => ({
-  type: actionTypes.CHANGE_CURRENT_SONG,
-  currentSong,
-});
-
 export const getSongDetailAction = (
-  ids: number,
+  musicInfo: any,
   origin: string,
-  bbbugSongInfo?: any
 ) => {
   return (dispatch: Dispatch<any>, getState: any) => {
     //根据id查找playList中是否存在歌曲
     let song = null;
     const playerList = getState().playerBar.playList;
-    const index = playerList.findIndex((song: any) => song.id === ids);
+    const index = playerList.findIndex((song: any) => song.id === musicInfo.id || song.id === musicInfo.mid);
     if (index !== -1) {
       dispatch(changeCurrentSongIndexAction(index));
       song = playerList[index];
@@ -32,21 +23,10 @@ export const getSongDetailAction = (
     } else {
       //列表中不存在该歌曲
       let newPlayList: any;
-      //区分来源
-      switch (origin) {
-        case "netease":
-          getSongDetail_netease(ids).then((res) => {
-            song = res.songs && formatMusicInfo(res, origin);
-            if (!song) return;
-            newPlayList = [...playerList, song];
-          });
-          break;
-        default:
-          song = formatMusicInfo(bbbugSongInfo, origin);
-          if (!song) return;
-          newPlayList = [...playerList, song];
-          break;
-      }
+      //根据不同的来源处理成一样的歌曲信息
+      song = formatMusicInfo(musicInfo, origin);
+      if (!song) return;
+      newPlayList = [...playerList, song];
       dispatch(changePlayListAction(newPlayList));
       dispatch(changeCurrentSongIndexAction(newPlayList.length - 1));
       dispatch(changeCurrentSongAction(song));
@@ -101,12 +81,43 @@ export const changeCurrentSong = (
         break;
     }
     const currentSong = playList[currentSongIndex];
-    console.log(currentSong)
     dispatch(changeCurrentSongAction(currentSong));
     dispatch(changeCurrentSongIndexAction(currentSongIndex));
     dispatch(getLyricAction(currentSong.id, currentSong.origin));
   };
 };
+
+
+/**
+ * 获取歌词
+ * @param {id} 歌曲的id
+ * @parma {origin} 歌曲的来源
+*/
+export const getLyricAction = (id: number, origin: string) => {
+  return (dispatch: Dispatch<any>) => {
+    switch (origin) {
+      case "netease":
+        getLRC_NETEASE(id).then((res) => {
+          const lyricString = res.lrc.lyric;
+          const lyricList = parseLyric(lyricString, origin);
+          dispatch(changeCurrentLyricAction(lyricList));
+        });
+        break;
+      default:
+        getLRC_BBBUG(id).then((res) => {
+          const lyricString = res.data;
+          const lyricList = parseLyric(lyricString, origin);
+          dispatch(changeCurrentLyricAction(lyricList));
+        });
+        break;
+    }
+  };
+};
+
+const changeCurrentSongAction = (currentSong: any) => ({
+  type: actionTypes.CHANGE_CURRENT_SONG,
+  currentSong,
+});
 
 /**
  * 改变播放列表
@@ -140,31 +151,6 @@ export const changeCurrentLyricAction = (currentLyric: ILyric[]) => ({
   currentLyric,
 });
 
-/**
- * 获取歌词
- * @param {id} 歌曲的id
- * @parma {origin} 歌曲的来源
-*/
-export const getLyricAction = (id: number, origin: string) => {
-  return (dispatch: Dispatch<any>) => {
-    switch (origin) {
-      case "netease":
-        getLRC_NETEASE(id).then((res) => {
-          const lyricString = res.lrc.lyric;
-          const lyricList = parseLyric(lyricString, origin);
-          dispatch(changeCurrentLyricAction(lyricList));
-        });
-        break;
-      default:
-        getLRC_BBBUG(id).then((res) => {
-          const lyricString = res.data;
-          const lyricList = parseLyric(lyricString, origin);
-          dispatch(changeCurrentLyricAction(lyricList));
-        });
-        break;
-    }
-  };
-};
 
 //显示隐藏播放条
 export const changeShowPlayerAction = (isShowPlayer: boolean) => ({

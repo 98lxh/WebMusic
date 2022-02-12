@@ -84,7 +84,7 @@ const Search: React.FC = memo(() => {
         return (
           <div className="search-table-handle">
             <CaretRightOutlined
-              onClick={() => dispatch(getSongDetailAction(r.mid, "bbbug", r))}
+              onClick={() => dispatch(getSongDetailAction(r, "bbbug"))}
             />
             <PlusOutlined />
           </div>

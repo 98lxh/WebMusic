@@ -2,6 +2,7 @@ import React from "react";
 
 import { Empty } from "antd";
 import "./index.less";
+import { Link } from "react-router-dom";
 
 const GolbalEmtry = () => {
   return (
@@ -9,7 +10,7 @@ const GolbalEmtry = () => {
       <Empty
         className="emtry"
         image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
-        description={<a href="/">该功能正在开发中,点击返回首页</a>}
+        description={<Link to="/">该功能暂未开发,点击返回首页</Link>}
       />
     </div>
   );

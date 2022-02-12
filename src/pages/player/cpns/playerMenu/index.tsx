@@ -46,7 +46,7 @@ const playerMenu: React.FC<IPlayMenuProps> = memo((props) => {
     <div className={`player-menu-wrapper ${props.isShow ? "show" : "hide"}`}>
       <Row gutter={24}>
         <Col sm={0} xs={0} md={10} lg={10} xl={10} className="music-info">
-          <div className="music-info-title">{currentSong.name}</div>
+          <div className="music-info-title">{currentSong.name || '暂无播放歌曲'}</div>
           <div className="music-lyric-wrapper" ref={lyricRef}>
             {currentLyric.map((lyricObj, index) => (
               <p

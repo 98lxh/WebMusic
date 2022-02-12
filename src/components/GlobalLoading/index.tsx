@@ -8,7 +8,7 @@ interface IGolbalLoadingProps {
 const GolbalLoading: React.FC<IGolbalLoadingProps> = memo((props) => {
   const { type } = props;
   return (
-    <div className={`loading-wrapper ${type === "golbal" && "golbal"}`}>
+    <div className={`loading-wrapper ${type === "golbal" && "golbal-loading"}`}>
       <div className="loading"></div>
     </div>
   );

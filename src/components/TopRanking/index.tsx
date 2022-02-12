@@ -15,7 +15,7 @@ const TopRanking: React.FC<TopRankingProps> = memo(({ rankingInfo }) => {
   const dispatch = useDispatch();
 
   const playMusic = (music: TopPlayListTrack) => {
-    dispatch(getSongDetailAction(music.id, "netease"));
+    dispatch(getSongDetailAction(music, "netease"));
   };
   return (
     <div className="top-ranking-wrapper">
@@ -23,10 +23,10 @@ const TopRanking: React.FC<TopRankingProps> = memo(({ rankingInfo }) => {
         <img
           src={`/imgs/ranking/${
             rankingInfo?.name === "新歌榜"
-              ? "t1.png"
+            ? "t3.png"
               : rankingInfo?.name === "飙升榜"
-              ? "t2.png"
-              : "t3.png"
+              ? "t1.png"
+              : "t2.png"
           }`}
           alt=""
         />

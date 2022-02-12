@@ -1,10 +1,9 @@
 import { IMusicInfo } from "../pages/player/store/reducer";
 
 export const formatMusicInfo = (musicInfo: any, origin: string): IMusicInfo => {
-  let song;
+  let song = musicInfo
   switch (origin) {
     case "netease":
-      song = musicInfo.songs[0];
       return {
         origin,
         id: song.id,
@@ -14,7 +13,6 @@ export const formatMusicInfo = (musicInfo: any, origin: string): IMusicInfo => {
         name: song.name,
       };
     default:
-      song = musicInfo;
       return {
         origin,
         id: song.mid,

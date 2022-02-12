@@ -43,6 +43,8 @@ const PlayerAudio = forwardRef<IAudioRef, PlayerAudioProps>(
       setCurrentLyricIndex,
     } = props
     const audioRef = useRef<HTMLAudioElement>(null);
+    const dispatch = useDispatch();
+
     const { currentSong, sequence, playList, lyric } = useSelector(
       (state: IRootState) => ({
         currentSong: state.playerBar.currentSong as any,
@@ -51,24 +53,6 @@ const PlayerAudio = forwardRef<IAudioRef, PlayerAudioProps>(
         lyric: state.playerBar.currentLyric,
       }),
       shallowEqual
-    );
-    const duration = currentSong.duration || 0;
-    const dispatch = useDispatch();
-
-    useImperativeHandle<any, IAudioRef>(
-      ref,
-      () => ({
-        setCurrentTime: (currentTime: number) => {
-          audioRef.current!.currentTime = currentTime;
-        },
-        pause: () => {
-          audioRef.current?.pause();
-        },
-        play: () => {
-          audioRef.current?.play();
-        },
-      }),
-      [audioRef]
     );
 
     useEffect(() => {
@@ -90,8 +74,26 @@ const PlayerAudio = forwardRef<IAudioRef, PlayerAudioProps>(
 
     useEffect(() => {
       const list = [...playList];
-      list.length && dispatch(getSongDetailAction(list[0].id, list[0].origin));
-    }, [dispatch]);
+      list.length && dispatch(getSongDetailAction(list[0], list[0].origin));
+    }, [dispatch]); //eslint-disable-line
+
+    useImperativeHandle<any, IAudioRef>(
+      ref,
+      () => ({
+        setCurrentTime: (currentTime: number) => {
+          audioRef.current!.currentTime = currentTime;
+        },
+        pause: () => {
+          audioRef.current?.pause();
+        },
+        play: () => {
+          audioRef.current?.play();
+        },
+      }),
+      [audioRef]
+    );
+
+    const duration = currentSong.duration || 0;
 
     const timeUpdate = (event: React.UIEvent<HTMLAudioElement>) => {
       if (isChange) return;

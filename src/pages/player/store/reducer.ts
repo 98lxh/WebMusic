@@ -23,7 +23,7 @@ const defaultState = {
   playList: [],
   currentSongIndex: 0,
   currentSong: {},
-  sequence: 0, //0 单曲 1随机 //2顺序
+  sequence: 2, //0 单曲 1随机 //2顺序
   currentLyric: [],
   isShowPlayer: true,
 };
