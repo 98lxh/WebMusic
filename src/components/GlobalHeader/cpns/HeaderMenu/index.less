@@ -1,10 +1,11 @@
+@import "./../../../../assets/less/variable.less";
 .header-menu-wapper {
-  transition: all 0.5s ease-in-out;
+  transition: @theme-transition;
   transition-delay: -1s;
   padding: 0 1rem;
 
   .ant-menu-sub {
-    background-color: #1a1d29 !important;
+    background-color:  @theme-dark-bg !important;
 
     a {
       color: #fff !important;
@@ -14,7 +15,7 @@
 
 .dark {
   .header-menu-wapper {
-    background-color: #1a1d29;
+    background-color: @theme-dark-bg;
     border-bottom: 0px !important;
 
     .ant-menu-overflow-item {

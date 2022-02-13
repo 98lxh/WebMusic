@@ -1,3 +1,4 @@
+@import "./../assets/less/variable.less";
 .layout-wrapper {
   width: 100%;
 
@@ -14,18 +15,18 @@
   }
 
   .main-wrapper {
-    background-color: #f7f7f7;
+    background-color: @theme-light-bg;
     padding-bottom: 2rem;
     min-height: calc(100vh - 15rem);
-    transition: all 0.5s ease-in-out;
+    transition:@theme-transition;
   }
 }
 
 .dark {
-  background-color: #1a1d29 !important;
+  background-color: @theme-dark-bg !important;
 
   .main-wrapper {
-    background-color: #1a1d29 !important;
+    background-color:  @theme-dark-bg !important;
   }
 }
 

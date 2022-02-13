@@ -51,9 +51,9 @@ const PlayerBar: React.FC = memo(() => {
       >
         <div className="content">
           <PlayerMenu
-        isShow={isShowPlayerMenu}
-        onClose={closePlayerMenu}
-        currentLyricIndex={currentLyricIndex}
+            isShow={isShowPlayerMenu}
+            onClose={closePlayerMenu}
+            currentLyricIndex={currentLyricIndex}
           />
           <Row gutter={24} justify="center" style={{ width: "100%" }}>
             <Col sm={24} xs={24} md={16} lg={16} xl={16} className="play-info">

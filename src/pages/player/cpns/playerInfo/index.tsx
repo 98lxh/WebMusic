@@ -4,8 +4,9 @@ import { IRootState } from "../../../../store/reducer";
 import { formatDate } from "../../../../utils/format-utils";
 import { IAudioRef } from "../playerAudio";
 import { Slider } from "antd";
-import "./index.less";
 import { IMusicInfo } from "../../store/reducer";
+import "./index.less";
+
 interface IPlayInfoProps {
   isPlay: boolean;
   audio: IAudioRef;

@@ -1,12 +1,13 @@
-import { Col, Row } from "antd";
 import React, { memo, useEffect, useRef } from "react";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+
 import {
   DeleteOutlined,
   UnorderedListOutlined,
   DownloadOutlined,
   CloseOutlined,
 } from "@ant-design/icons";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { Col, Row, Typography } from "antd";
 import { IRootState } from "../../../../store/reducer";
 import { formatDate } from "../../../../utils/format-utils";
 import { changeCurrentSong } from "../../store/actionCreators";
@@ -46,7 +47,8 @@ const playerMenu: React.FC<IPlayMenuProps> = memo((props) => {
     <div className={`player-menu-wrapper ${props.isShow ? "show" : "hide"}`}>
       <Row gutter={24}>
         <Col sm={0} xs={0} md={10} lg={10} xl={10} className="music-info">
-          <div className="music-info-title">{currentSong.name || '暂无播放歌曲'}</div>
+
+          <Typography.Paragraph className="music-info-title">{currentSong.name || '暂无播放歌曲'}</Typography.Paragraph>
           <div className="music-lyric-wrapper" ref={lyricRef}>
             {currentLyric.map((lyricObj, index) => (
               <p
@@ -64,7 +66,7 @@ const playerMenu: React.FC<IPlayMenuProps> = memo((props) => {
           <div className="music-menu-title">
             <div className="music-menu-icon">
               <UnorderedListOutlined />
-              <p>播放列表({playList.length || 0})</p>
+              <Typography.Paragraph className="music-info-title">播放列表({playList.length || 0})</Typography.Paragraph>
             </div>
             <div className="music-menu-clear">
               <DeleteOutlined />

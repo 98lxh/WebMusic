@@ -1,3 +1,4 @@
+@import "./../../../../assets/less/variable.less";
 .header-search-wrapper {
   position: relative;
   button {
@@ -58,8 +59,8 @@
 .dark {
   .header-search-wrapper {
     .ant-input-group-addon {
-      background-color: transparent !important;
-
+      background-color: @theme-dark-bg !important;
+      
       .ant-input {
         border: 0 !important;
         outline: none;

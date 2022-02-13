@@ -1,15 +1,15 @@
+@import "./../../assets/less/variable.less";
 .player-bar-wrapper {
-  width: 100%;
+  width: 90%;
   box-sizing: border-box;
   background-color: rgba(255, 255, 255, 0.85);
   box-shadow: 0 0 60px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(15px);
   position: fixed;
   border-radius: 2rem;
-  transition: all 0.5s ease-in-out;
+  transition: @theme-transition;
   z-index: 100;
   bottom: 0rem;
-  width: 90%;
   left: 50%;
   transform: translateY(100%) translateX(-50%);
 
@@ -19,7 +19,7 @@
   }
 
   .content {
-    padding: 1rem;
+    padding: .8rem;
     align-items: center;
   }
 
@@ -31,7 +31,8 @@
 
 .dark {
   .player-bar-wrapper {
-    background-color: #1a1d29cc;
+    background-color:  #1a1d29cc;
+    backdrop-filter: blur(15px);
     color: #fff !important;
     box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
 
